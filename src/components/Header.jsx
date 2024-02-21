@@ -33,7 +33,7 @@ export default function Example() {
 
   return (
     <header className="bg-white">
-      <nav className="mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav className="h-28 mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
@@ -53,7 +53,7 @@ export default function Example() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+        <Popover.Group className="hidden lg:flex lg:gap-x-16">
           {/* <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Product
@@ -105,26 +105,32 @@ export default function Example() {
             </Transition>
           </Popover> */}
 
-          <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Find Job
           </a>
-          <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
+          </a> */}
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+            Scholarship
           </a>
-          <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+            Career Coaching
+          </a>
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             About
           </a>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-8">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-7">
             <BellIcon className="h-7 w-7 lg:flex self-center"/>
             <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center">
                 Post a Job
             </a>
-            <button className='rounded-full bg-blue-500 lg:flex h-11'>
-                <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-white mx-8 self-center">
+            <a href='#' className='rounded-full lg:flex h-11 -ml-1 bg-blue-500 hover:bg-blue-400 text-white'>
+                <div className="text-base font-semibold font-plusjakarta leading-6 mx-8 self-center">
                     Sign In / Sign Up
-                </a>
-            </button>
+                </div>
+            </a>
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
