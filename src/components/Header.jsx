@@ -8,6 +8,7 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
   XMarkIcon,
+  BellIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 
@@ -114,10 +115,16 @@ export default function Example() {
             About
           </a>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-8">
+            <BellIcon className="h-7 w-7 lg:flex self-center"/>
+            <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center">
+                Post a Job
+            </a>
+            <button className='rounded-full bg-blue-500 lg:flex h-11'>
+                <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-white mx-8 self-center">
+                    Sign In / Sign Up
+                </a>
+            </button>
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
