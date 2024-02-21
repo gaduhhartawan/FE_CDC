@@ -8,8 +8,11 @@ const Home = () => {
     <div>
       <Header />
       {/* <SearchBox /> */}
-      <div className="p-5 h-screen flex flex-col items-center justify-between gap-5">
+      <div className="flex flex-col px-3 py-1 lg:px-20 lg:py-12">
         <SearchBox />
+      </div>
+      <div className="p-5 h-screen flex flex-col items-center justify-between gap-5">
+        {/* <SearchBox /> */}
         <div class="grid grid-rows-2 grid-flow-col gap-8">
           <Card />
           <Card />
