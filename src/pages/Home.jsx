@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <Header />
       {/* <SearchBox /> */}
-      <div className="flex flex-col px-3 py-1 lg:px-20 lg:py-12">
+      <div className="flex flex-col px-3 py-1 lg:px-12 lg:py-8">
         <SearchBox />
       </div>
       <div className="p-5 h-screen flex flex-col items-center justify-between gap-5">

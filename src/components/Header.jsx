@@ -11,11 +11,11 @@ export default function Header() {
 
   return (
     <header className="bg-white">
-      <nav className="h-28 mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav className="h-28 mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-12" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src="src\assets\ico.png" alt="" />
+            <img className="h-8 w-auto" src="ico.png" alt="" />
           </a>
           <p className='mx-2 flex text-3xl font-bold font-plusjakarta tracking-tight'>
             careerpath.
@@ -83,28 +83,28 @@ export default function Header() {
             </Transition>
           </Popover> */}
 
-          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Find Job
           </a>
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
-          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Scholarship
           </a>
-          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Career Coaching
           </a>
-          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
+          <a href="#" className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             About
           </a>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-7">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-8">
             <BellIcon className="h-7 w-7 lg:flex self-center invisible"/>
-            <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center invisible">
+            <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center hidden">
                 Post a Job
             </a>
-            <a href='#' className='rounded-full lg:flex h-11 -ml-1 bg-blue-500 hover:bg-blue-400 text-white'>
+            <a href='#' className='rounded-full lg:flex h-11 -ml-1 bg-bluu hover:bg-blue-400 text-white'>
                 <div className="text-base font-semibold font-plusjakarta leading-6 mx-8 self-center">
                     Sign In / Sign Up
                 </div>
