@@ -15,6 +15,8 @@ export default {
       colors: {
         "search-bar": "#E7EEFE",
         bluu: "#387AF4",
+        palebluu: "#79A8FF",
+        whitegray: "#E7EEFE",
       },
     },
   },

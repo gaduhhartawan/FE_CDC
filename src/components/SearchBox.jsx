@@ -9,7 +9,6 @@ export default function SearchBox() {
     <div className="rounded-sr h-40 lg:h-fit lg:flex flex-col items-center justify-center bg-bluu">
         <img
             src="bar.svg"
-            alt="google"
             className="size-full"
         />
         <div className="lg:flex flex-col gap-8 absolute items-center">
@@ -26,7 +25,7 @@ export default function SearchBox() {
                         Find Job
                     </div>
                 </div>
-                <MinusIcon className='h-10 w-10 rotate-90 '/>
+                <MinusIcon className='h-12 w-12 rotate-90 '/>
                 <div className="lg:flex flex-row h-14 w-1/2 items-center mx-3 gap-2 justify-between">
                     <div className="lg:flex flex-row h-14 w-1/2 items-center gap-2">
                         <MapPinIcon className='h-5 w-5'/>
