@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = () => {
   return (
-    <div className="rounded-3xl flex flex-col items-center justify-center gap-2 bg-blue-400 text-white px-8 py-3">
+    <div className="group/card rounded-3xl flex flex-col items-center justify-center gap-2 hover:bg-palebluu hover:outline-none hover:text-white bg-white outline outline-blue-400 text-black font-plusjakarta px-8 py-3">
       <img
         src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
         alt="google"
@@ -18,7 +18,7 @@ const Card = () => {
         <span>Full-time</span>
         <span>27 Feb 2024</span>
       </div>
-      <button className="self-end rounded-full px-5 py-2 bg-white text-black font-semibold mt-4">
+      <button className="self-end rounded-full px-5 py-2 group-hover/card:bg-white group-hover/card:text-black bg-blue-500 text-white font-semibold mt-4">
         Details
       </button>
     </div>
