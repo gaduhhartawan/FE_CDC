@@ -2,8 +2,17 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import { useGetJob } from "../hooks/jobs/useJobsQuery";
+import { format } from "date-fns";
 
 const Job = () => {
+  const { data: job, isLoading } = useGetJob("65d6111a62fced8f5a230b1d");
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  // console.log(data);
   return (
     <div className="min-h-svh">
       <Header />
@@ -28,12 +37,19 @@ const Job = () => {
                 className="w-40 h-40"
               />
               <div className="flex flex-col gap-1">
-                <h2 className="text-2xl font-semibold">UI UX Designer</h2>
+                <h2 className="text-2xl font-semibold">{job.jobTitle}</h2>
                 <div className="flex gap-2">
-                  <span className="text-sm font-semibold">at Google</span>
-                  <span className="rounded-md bg-blue-500 text-white text-sm uppercase px-2">
-                    fulltime
+                  <span className="text-sm font-semibold">
+                    {job.companyName}
                   </span>
+                  {job.jobType.map((type) => (
+                    <span
+                      key={type}
+                      className="rounded-md bg-blue-500 text-white text-sm uppercase px-2"
+                    >
+                      {type}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -111,7 +127,7 @@ const Job = () => {
               <div className="bg-blue-200 rounded-md grid grid-cols-2 p-5 gap-5">
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Job Location</h3>
-                  <span>Jakarta, Indonesia</span>
+                  <span>{job.jobLocation}</span>
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Working Site</h3>
@@ -119,11 +135,11 @@ const Job = () => {
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Job Posted</h3>
-                  <span>20 Feb 2024</span>
+                  <span>{format(new Date(job.createdAt), "dd-MM-yyyy")}</span>
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Salary Monthly</h3>
-                  <span>IDR 10.0000.000</span>
+                  <span>IDR {job.salaryNum}</span>
                 </div>
               </div>
             </div>
