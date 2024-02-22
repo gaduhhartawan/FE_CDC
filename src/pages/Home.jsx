@@ -13,7 +13,7 @@ const Home = () => {
       </div>
       <div className="p-5 h-screen flex flex-col items-center justify-between gap-5">
         {/* <SearchBox /> */}
-        <div class="grid grid-rows-2 grid-flow-col gap-8">
+        <div className="grid grid-rows-2 grid-flow-col gap-8">
           <Card />
           <Card />
           <Card />
