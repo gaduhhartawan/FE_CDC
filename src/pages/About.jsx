@@ -7,7 +7,12 @@ function DisplayEgg({ name, hitung }) {
     if (hitung != 7) {
       return null;
     }
-    return <img src="egg.png" className="w-60 self-center"></img>;
+    return (
+        <>
+            <img src="egg.png" className="w-60 self-center"></img>
+            <h1 className="text-center">{name}</h1>
+        </>
+    );
   }
 
 export default function About() {
