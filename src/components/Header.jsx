@@ -23,7 +23,7 @@ export default function Header() {
   });
 
   return (
-    <header className="bg-white">
+    <header className="bg-white sticky top-0 z-50">
       <nav
         className="h-28 mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8 relative"
         aria-label="Global"
@@ -51,12 +51,12 @@ export default function Header() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-7">
-          <a
-            href="#"
+          <Link
+            to="/jobs"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Find Job
-          </a>
+          </Link>
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
