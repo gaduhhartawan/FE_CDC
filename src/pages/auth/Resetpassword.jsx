@@ -35,7 +35,7 @@ export default function Resetpassword(){
                 </div>
                 <div className='mt-6 justify-center text-center'>
                     <div className='font-italic text-base'>
-                    Oh, do you remember the password now? Lets <Link to="/login" className="text-blue-500 hover:underline hover:text-blue-600"> Log in!</Link> 
+                    Oh, do you remember the password now? Let {"'"}s <Link to="/login" className="text-blue-500 hover:underline hover:text-blue-600"> Log in!</Link> 
                       
                     </div>
                 </div>
