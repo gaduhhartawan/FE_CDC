@@ -1,33 +1,39 @@
 import React from "react";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
   const parts = data?.jobLocation.split(",");
   const location = parts[1].trim();
-  const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
+  // const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
+
+  // Img name
+  const fullname = data.companyName.split(" ").join("+");
+  // date
+  const date = new Date(data?.createdAt);
+  const formattedDate = formatDistanceToNow(date, { addSuffix: true });
+
   return (
-    <div className="group/card rounded-3xl flex flex-col items-center justify-center gap-2 hover:bg-palebluu hover:outline-none hover:text-white bg-white outline outline-blue-400 text-black font-plusjakarta px-8 py-3">
-      <img
-        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-        alt="google"
-        className="w-16 h-16"
-      />
-      <div className="text-center">
-        <h2 className="font-semibold text-lg">{data.jobTitle}</h2>
-        <span>{data.companyName}</span>
+    <Link
+      to={`/jobs/${data._id}`}
+      className="flex justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
+    >
+      {/* user */}
+      <div className="flex items-center gap-4">
+        <img
+          src={`https://ui-avatars.com/api/?name=${fullname}&background=D9D9D9`}
+          className="rounded-full"
+          alt=""
+        />
+        <div className="flex flex-col">
+          <span>{data.companyName}</span>
+          <span className="font-bold">{data.jobTitle}</span>
+          <span className="text-gray-500">{location} | Fulltime</span>
+        </div>
       </div>
-      <div className="grid grid-cols-2 gap-y-3 mt-3">
-        <span className="max-w-7">{location}</span>
-        <span className="text-right">
-          {data.salaryNum ? data.salaryNum : "Gaji tidak tercantum"}
-        </span>
-        <span>{data?.jobType.length !== 0 ? data?.jobType[0] : "-"}</span>
-        <span className="text-right">{date}</span>
-      </div>
-      <button className="self-end rounded-full px-5 py-2 group-hover/card:bg-white group-hover/card:text-black bg-blue-500 text-white font-semibold mt-4">
-        Details
-      </button>
-    </div>
+      {/* time */}
+      <span>{formattedDate}</span>
+    </Link>
   );
 };
 
