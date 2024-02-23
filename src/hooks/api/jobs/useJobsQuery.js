@@ -1,11 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../../utils/axios";
 
-export const useGetJobs = () => {
+export const useGetJobs = (
+  title = "",
+  location = "",
+  min = "",
+  max = "",
+  jobType = "",
+  category = ""
+) => {
   return useQuery({
     queryKey: ["jobs"],
     queryFn: async () =>
-      await axiosInstance.get("/jobs").then((res) => res.data),
+      await axiosInstance
+        .get(
+          `/jobs?search=${title}&location=${location}&min=${min}&max=${max}&jobtype=${jobType}&category=${category}`
+        )
+        .then((res) => res.data),
   });
 };
 
