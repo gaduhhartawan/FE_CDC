@@ -1,15 +1,25 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../../utils/axios";
 
-export const useLoginMutation = () => {
+export const useLoginMutation = ({ onSuccess }) => {
   return useMutation({
     mutationFn: async ({ email, password }) =>
       await axiosInstance.post("/auth/login", { email, password }),
+    onSuccess,
   });
 };
 
-export const useLogoutMutation = () => {
+export const useRegisterMutation = ({ onSuccess }) => {
+  return useMutation({
+    mutationFn: async (user) =>
+      await axiosInstance.post("/auth/signup", { ...user }),
+    onSuccess,
+  });
+};
+
+export const useLogoutMutation = ({ onSuccess }) => {
   return useMutation({
     mutationFn: async () => await axiosInstance.post("/auth/logout"),
+    onSuccess,
   });
 };
