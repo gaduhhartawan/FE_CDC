@@ -96,6 +96,7 @@ const Job = () => {
                   Google is headquartered in Mountain View, California, the US.
                 </p>
               </div>
+              
               {/* Job Description */}
               <div className="flex flex-col gap-1 my-3">
                 <h2 className="text-2xl font-semibold">Job Description</h2>

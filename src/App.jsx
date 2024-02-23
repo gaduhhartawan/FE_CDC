@@ -9,16 +9,13 @@ import Resetpassword from "./pages/auth/Resetpassword";
 import Layout from "./components/Layout";
 import MyAccount from "./pages/MyAccount";
 import Jobs from "./pages/Jobs";
+import PostJob from "./pages/PostJob";
+import Notfound from "./pages/Notfound";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="forgotpassword" element={<ForgotPassword />} />
-        <Route path="resetpassword" element={<Resetpassword />} />
-
         {/* Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -27,6 +24,12 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="myaccount" element={<MyAccount />} />
         </Route>
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
+        <Route path="resetpassword" element={<Resetpassword />} />
+        <Route path="postjob" element={<PostJob />} />
+        <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
   );
