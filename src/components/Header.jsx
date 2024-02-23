@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import { useState } from "react";
+import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
 import { Bars3Icon, XMarkIcon, BellIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
@@ -11,20 +11,16 @@ export default function Header() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const fullname = currentUser?.fullname.split(" ").join("+");
 
-  const { mutate, isSuccess } = useLogoutMutation();
-
-  const handleLogout = async () => {
-    try {
-      mutate();
-      if (isSuccess) {
-        localStorage.setItem("currentUser", null);
-        setLogout(false);
-        toast.success("Berhasil Logout!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { mutate } = useLogoutMutation({
+    onSuccess: () => {
+      localStorage.setItem("currentUser", null);
+      setLogout(false);
+      toast.success("Berhasil Logout!", {
+        pauseOnHover: false,
+        position: "bottom-right",
+      });
+    },
+  });
 
   return (
     <header className="bg-white">
@@ -113,7 +109,7 @@ export default function Header() {
         {logout && (
           <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center">
             <span>My Account</span>
-            <button className="mt-1" onClick={handleLogout}>
+            <button className="mt-1" onClick={mutate}>
               Logout
             </button>
           </div>
