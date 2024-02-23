@@ -2,8 +2,8 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { useGetJob } from "../hooks/jobs/useJobsQuery";
 import { format } from "date-fns";
+import { useGetJob } from "../hooks/api/jobs/useJobsQuery";
 
 const Job = () => {
   const { data: job, isLoading } = useGetJob("65d6111a62fced8f5a230b1d");
