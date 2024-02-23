@@ -1,9 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
-import Header from "../components/Header";
 import SearchBox from "../components/SearchBox";
-import FilterCard from "../components/FilterCard";
-import Footer from "../components/Footer";
 import { useGetJobs } from "../hooks/api/jobs/useJobsQuery";
 import { Link } from "react-router-dom";
 
