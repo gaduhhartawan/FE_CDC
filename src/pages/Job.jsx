@@ -5,13 +5,22 @@ import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useGetJob } from "../hooks/api/jobs/useJobsQuery";
 
+
 const Job = () => {
   const { id } = useParams();
   const { data: job, isLoading } = useGetJob(id);
 
   // location
   const parts = job?.jobLocation.split(",");
-  const location = parts ? parts[1].trim() : "";
+  let location;
+  if (parts?.length > 1) {
+    location = parts ? parts[1].trim() : "";
+  } else {
+    location = parts ? parts[0].trim() : "";
+  }
+
+  //Link
+  const linkJob = job?.jobLink;
 
   // Img name
   const fullname = job?.companyName.split(" ").join("+");
@@ -62,9 +71,9 @@ const Job = () => {
               </div>
             </div>
             {/* button */}
-            <button className="bg-blue-500 text-white px-5 py-2 rounded-md">
+            <a href={linkJob} target="_blank" className="bg-blue-500 text-white px-5 py-2 rounded-md">
               Apply Now
-            </button>
+            </a>
           </div>
 
           <div className="flex gap-10">
@@ -140,7 +149,7 @@ const Job = () => {
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Working Site</h3>
-                  <span>Internship</span>
+                  <span className="capitalize">{job.workingSite}</span>
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Job Posted</h3>
@@ -148,7 +157,7 @@ const Job = () => {
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Salary Monthly</h3>
-                  <span>IDR {job.salaryNum ? job.salaryNum : "-"}</span>
+                  <span>{job.salaryNum ? "IDR " + job.salaryNum : "Undisclosed"}</span>
                 </div>
               </div>
             </div>
