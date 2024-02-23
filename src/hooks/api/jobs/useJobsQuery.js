@@ -9,6 +9,16 @@ export const useGetJobs = () => {
   });
 };
 
+export const searchJobs = (searchKey, locationKey) => {
+  return useQuery({
+    queryKey: [searchKey, locationKey],
+    queryFn: async () =>
+      await axiosInstance
+        .get(`jobs/?search=${searchKey}&location=${locationKey}`)
+        .then((res) => res.data),
+  });
+};
+
 export const useGetJob = (jobId) => {
   return useQuery({
     queryKey: [jobId],
