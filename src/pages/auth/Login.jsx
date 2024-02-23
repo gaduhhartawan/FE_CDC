@@ -11,24 +11,24 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const { mutate, data, isSuccess, isError, error } = useLoginMutation();
+  const { mutate } = useLoginMutation({
+    onSuccess: (data) => {
+      localStorage.setItem("currentUser", JSON.stringify(data.data));
+      toast.success("Login Berhasil!", {
+        pauseOnHover: false,
+        position: "bottom-right",
+      });
+      setEmail("");
+      setPassword("");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    },
+  });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      mutate({ email, password });
-      if (isSuccess) {
-        localStorage.setItem("currentUser", JSON.stringify(data.data));
-        toast.success("Login Berhasil!");
-        setEmail("");
-        setPassword("");
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    mutate({ email, password });
   };
 
   return (
@@ -84,19 +84,19 @@ export default function LoginPage() {
                 </button>
               </div>
             </div>
-            <div className="mt-6 justify-center text-center">
-              <div className="font-italic text-base">
-                Dont have an account yet?{" "}
-                <Link
-                  to="/register"
-                  className="text-blue-500 hover:underline hover:text-blue-600"
-                >
-                  Sign up{" "}
-                </Link>{" "}
-                now, its free!
-              </div>
-            </div>
           </form>
+          <div className="mt-6 justify-center text-center">
+            <div className="font-italic text-base">
+              Dont have an account yet?{" "}
+              <Link
+                to="/register"
+                className="text-blue-500 hover:underline hover:text-blue-600"
+              >
+                Sign up{" "}
+              </Link>{" "}
+              now, its free!
+            </div>
+          </div>
         </div>
       </div>
     </>
