@@ -16,14 +16,22 @@ function Loading({isLoading}) {
   );
 }
 
+function NoJobsAvailable({data}) {
+  if (data === 0) {
+    return <p className=" text-center justify-center items-center font-plusjakarta text-black font-bold text-3xl mt-10">No Jobs Available Right Now!</p>
+  }
+  return (
+    <></>
+  );
+}
+
 const Home = () => {
-  const Jobs = ["Frontend", "Backend", "Devops", "UI/UX", "Mobile Programmer"];
+  // const Jobs = ["Frontend", "Backend", "Devops", "UI/UX", "Mobile Programmer"];
   const [search, setSearch] = useState('');
   const [location, setlocation] = useState('');
   const { data, isLoading } = searchJobs(search, location);
-
-  const jobs = data?.slice(0, 5);
-  // console.log(jobs);
+  
+  const jobs = data?.slice(0,5); 
 
   return (
     <div>
@@ -63,6 +71,7 @@ const Home = () => {
               ))}
             </div> */}
             <Loading isLoading={isLoading} />
+            <NoJobsAvailable data={jobs?.length}/>
             <div className="flex flex-col gap-5">
               {jobs?.map((job) => (
                 <Card key={job._id} data={job} />

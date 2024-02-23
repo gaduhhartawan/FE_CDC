@@ -4,11 +4,20 @@ import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
   const parts = data?.jobLocation.split(",");
-  const location = parts[1].trim();
+
+  // Location if parts array more than 1 element take the 2nd element
+  let location;
+  if (parts.length > 1) {
+    location = parts[1].trim();
+  } else {
+    location = parts[0].trim();
+  }
+  
   // const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
 
   // Img name
   const fullname = data.companyName.split(" ").join("+");
+  
   // date
   const date = new Date(data?.createdAt);
   const formattedDate = formatDistanceToNow(date, { addSuffix: true });
