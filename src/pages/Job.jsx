@@ -1,12 +1,20 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useGetJob } from "../hooks/api/jobs/useJobsQuery";
 
 const Job = () => {
-  const { data: job, isLoading } = useGetJob("65d6111a62fced8f5a230b1d");
+  const { id } = useParams();
+  const { data: job, isLoading } = useGetJob(id);
+
+  // location
+  const parts = job?.jobLocation.split(",");
+  const location = parts ? parts[1].trim() : "";
+
+  // Img name
+  const fullname = job?.companyName.split(" ").join("+");
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -15,7 +23,7 @@ const Job = () => {
   // console.log(data);
   return (
     <div className="min-h-svh">
-      <Header />
+      {/* <Header /> */}
       <div className="p-6 lg:px-9">
         {/* breadcrumbs */}
         <div className="flex gap-2">
@@ -30,11 +38,11 @@ const Job = () => {
           {/* user */}
           <div className="flex items-center justify-between max-w-5xl">
             {/* user */}
-            <div className="flex items-center">
+            <div className="flex items-center gap-5 my-5">
               <img
-                src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                src={`https://ui-avatars.com/api/?name=${fullname}&background=D9D9D9`}
                 alt="company_img"
-                className="w-40 h-40"
+                className="w-20 h-20 rounded-full"
               />
               <div className="flex flex-col gap-1">
                 <h2 className="text-2xl font-semibold">{job.jobTitle}</h2>
@@ -82,7 +90,8 @@ const Job = () => {
               {/* Job Description */}
               <div className="flex flex-col gap-1 my-3">
                 <h2 className="text-2xl font-semibold">Job Description</h2>
-                <ul className="list-disc ml-5 font-light">
+                <p className="font-light text-justify">{job.jobDesc}</p>
+                {/* <ul className="list-disc ml-5 font-light">
                   <li>
                     Participate in and support product design and user research
                     activities.
@@ -100,7 +109,7 @@ const Job = () => {
                     data, and present findings
                   </li>
                   <li>Willingness to help recruit and schedule participants</li>
-                </ul>
+                </ul> */}
               </div>
               {/* Skill Requirements */}
               <div className="flex flex-col gap-1">
@@ -127,7 +136,7 @@ const Job = () => {
               <div className="bg-blue-200 rounded-md grid grid-cols-2 p-5 gap-5">
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Job Location</h3>
-                  <span>{job.jobLocation}</span>
+                  <span>{location}</span>
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Working Site</h3>
@@ -139,14 +148,14 @@ const Job = () => {
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Salary Monthly</h3>
-                  <span>IDR {job.salaryNum}</span>
+                  <span>IDR {job.salaryNum ? job.salaryNum : "-"}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
