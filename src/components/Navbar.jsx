@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon, BellIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function Header() {
             <img className="h-8 w-auto" src="/ico.png" alt="" />
           </a>
           <p className="mx-2 flex text-3xl font-bold font-plusjakarta tracking-tight">
-            careerpath.
+            <Link to="/">careerpath.</Link>
           </p>
         </div>
         <div className="flex lg:hidden">
@@ -59,7 +60,6 @@ export default function Header() {
             About
           </a>
         </Popover.Group>
-        
       </nav>
       <Dialog
         as="div"

@@ -1,27 +1,48 @@
 import React from "react";
+import { format, formatDistanceToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = ({ data }) => {
+  const parts = data?.jobLocation.split(",");
+
+  // Location if parts array more than 1 element take the 2nd element
+  let location;
+  if (parts.length > 1) {
+    location = parts[1].trim();
+  } else {
+    location = parts[0].trim();
+  }
+  
+  // const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
+
+  // Img name
+  const fullname = data.companyName.split(" ").join("+");
+  
+  // date
+  const date = new Date(data?.createdAt);
+  const formattedDate = formatDistanceToNow(date, { addSuffix: true });
+
   return (
-    <div className="rounded-3xl flex flex-col items-center justify-center gap-2 bg-blue-400 text-white px-8 py-3">
-      <img
-        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-        alt="google"
-        className="w-16 h-16"
-      />
-      <div className="text-center">
-        <h2 className="font-semibold text-lg">UI UX Designer</h2>
-        <span>Google Inc</span>
+    <Link
+      to={`/jobs/${data._id}`}
+      className="flex justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
+    >
+      {/* user */}
+      <div className="flex items-center gap-4">
+        <img
+          src={`https://ui-avatars.com/api/?name=${fullname}&background=D9D9D9`}
+          className="rounded-full"
+          alt=""
+        />
+        <div className="flex flex-col">
+          <span>{data.companyName}</span>
+          <span className="font-bold">{data.jobTitle}</span>
+          <span className="text-gray-500">{location} | Fulltime</span>
+        </div>
       </div>
-      <div className="grid grid-cols-2 gap-y-3 mt-3">
-        <span>Jakarta, ID</span>
-        <span>IDR 10.000.000</span>
-        <span>Full-time</span>
-        <span>27 Feb 2024</span>
-      </div>
-      <button className="self-end rounded-full px-5 py-2 bg-white text-black font-semibold mt-4">
-        Details
-      </button>
-    </div>
+      {/* time */}
+      <span>{formattedDate}</span>
+    </Link>
   );
 };
 
