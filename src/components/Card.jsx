@@ -12,7 +12,7 @@ const Card = ({ data }) => {
   } else {
     location = parts[0].trim();
   }
-  
+
   // const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
 
   // Img name
@@ -37,11 +37,11 @@ const Card = ({ data }) => {
         <div className="flex flex-col">
           <span>{data.companyName}</span>
           <span className="font-bold">{data.jobTitle}</span>
-          <span className="text-gray-500">{location} | Fulltime</span>
+          <span className="text-gray-500 capitalize">{location} | {data.jobType}</span>
         </div>
       </div>
       {/* time */}
-      <span>{formattedDate}</span>
+      <span className="capitalize">{formattedDate}</span>
     </Link>
   );
 };

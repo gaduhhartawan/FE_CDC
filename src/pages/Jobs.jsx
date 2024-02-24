@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Card from "../components/Card";
 import JobCard from "../components/JobCard";
 import { useGetJobs } from "../hooks/api/jobs/useJobsQuery";
 
@@ -9,7 +10,8 @@ const Jobs = () => {
   const [maxSalary, setMaxSalary] = useState("");
   const [jobType, setJobType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-
+  const [isFilter, setIsFilter] = useState(false);
+  
   const {
     data: jobs,
     isLoading,
@@ -25,11 +27,13 @@ const Jobs = () => {
   );
 
   const applyFilters = () => {
+    setIsFilter(true)
     setSelectedCategory("");
     refetch();
   };
 
   const clearFilters = () => {
+    setIsFilter(false)
     setTitle("");
     setLocation("");
     setMinSalary("");
@@ -49,7 +53,7 @@ const Jobs = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectedCategory]);
+  }, [selectedCategory, isFilter]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -81,6 +85,10 @@ const Jobs = () => {
     {
       title: "Mobile Programmer",
       value: "mobile",
+    },
+    {
+      title: "Marketing",
+      value: "marketing",
     },
   ];
 
@@ -114,10 +122,10 @@ const Jobs = () => {
       </div>
       {/* List Card */}
       <div className="flex relative">
-        <div className="flex-1 grid grid-cols-4 gap-y-5">
+        <div className="flex w-full flex-col gap-y-5 pr-5 h-full">
           {/* Card */}
           {data?.map((job) => (
-            <JobCard key={job._id} data={job} />
+            <Card key={job._id} data={job} />
           ))}
         </div>
         <div className="bg-gray-200 py-10 rounded-lg px-5 max-h-[530px] max-w-64 sticky top-32">

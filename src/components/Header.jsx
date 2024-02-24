@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
 import { Bars3Icon, XMarkIcon, BellIcon, UserIcon, ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline";
-import { NavLink, Link , useLocation} from "react-router-dom";
+import { NavLink, Link} from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
 
 export default function Header() {
@@ -10,7 +10,6 @@ export default function Header() {
   const [logout, setLogout] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const fullname = currentUser?.fullname.split(" ").join("+");
-  console.log(location.pathname)
   const { mutate } = useLogoutMutation({
     onSuccess: () => {
       localStorage.setItem("currentUser", null);
@@ -20,6 +19,24 @@ export default function Header() {
         position: "bottom-right",
       });
     },
+  });
+
+  const newRef = useRef(null);
+  const handleLogout = () => {
+    setLogout(!logout);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (newRef.current && !newRef.current.contains(e.target)) {
+      setLogout(false);
+    }
+  };
+  
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
   });
 
   return (
@@ -51,12 +68,14 @@ export default function Header() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-7 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
-          <Link
+          <NavLink
             to="/jobs"
-            className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
+            className={({ isActive }) =>
+                        isActive ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2" 
+                        : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2" }
           >
             Find Job
-          </Link>
+          </NavLink>
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
@@ -85,19 +104,19 @@ export default function Header() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-7">
           {currentUser && <BellIcon className="h-7 w-7 lg:flex self-center" />}
           {(currentUser?.isAdmin || currentUser?.isCompany) && (
-            <a
-              href="#"
+            <NavLink
+              to="/postjob"
               className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center"
             >
               Post a Job
-            </a>
+            </NavLink>
           )}
           {currentUser && (
             <img
               src={`https://ui-avatars.com/api/?name=${fullname}&rounded=true`}
               alt=""
               className="w-10 h-10 cursor-pointer"
-              onClick={() => setLogout(!logout)}
+              onClick={handleLogout}
             />
           )}
           {!currentUser && (
@@ -113,11 +132,11 @@ export default function Header() {
         </div>
         {/* logout */}
         {logout && (
-          <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center">
-            <div className="flex flex-row items-center justify-center gap-2">
+          <div className=" absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center" ref={newRef}>
+            <Link to="/myaccount" className="flex flex-row items-center justify-center gap-2">
               <UserIcon className="h-6 w-6"/>
               <span>My Account</span>
-            </div>
+            </Link>
            <div className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2" onClick={mutate}>
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6"/>
             <span>Logout</span>
@@ -147,7 +166,7 @@ export default function Header() {
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-6 flow-root">
+          <div className="mt-10 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <a

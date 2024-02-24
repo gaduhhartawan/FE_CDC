@@ -78,25 +78,6 @@ const Job = () => {
 
           <div className="flex gap-10">
             <div className="left flex-[2]">
-              {/* Company Profile */}
-              <div className="flex flex-col gap-1">
-                <h2 className="text-2xl font-semibold">Company Profile</h2>
-                <p className="text-lg font-light">
-                  a subsidiary of Alphabet Inc, is a provider of search and
-                  advertising services on the internet. The company{"'"}s
-                  business areas include advertising, search, platforms and
-                  operating systems, and enterprise and hardware products. Its
-                  portfolio of products and services include Google Search,
-                  Google Chrome, Google Docs, Google Calendar, Google Photos,
-                  Google Meet, Google Drive, Google Finance, Google Play Books,
-                  Google News, Google Earth, Google Ad Manager, Google Play,
-                  AdMob, Google Maps, AdSense, Gmail, Google Groups, and
-                  YouTube. The company has business presence across the
-                  Americas, Europe, Asia-Pacific, Africa, and the Middle East.
-                  Google is headquartered in Mountain View, California, the US.
-                </p>
-              </div>
-              
               {/* Job Description */}
               <div className="flex flex-col gap-1 my-3">
                 <h2 className="text-2xl font-semibold">Job Description</h2>
@@ -120,24 +101,6 @@ const Job = () => {
                   </li>
                   <li>Willingness to help recruit and schedule participants</li>
                 </ul> */}
-              </div>
-              {/* Skill Requirements */}
-              <div className="flex flex-col gap-1">
-                <h2 className="text-2xl font-semibold">Skill Requirements</h2>
-                <ul className="list-disc ml-5 font-light">
-                  <li className="">
-                    Participate in and support product design and user research
-                    activities.
-                  </li>
-                  <li>
-                    Planning and conducting user research studies, such as
-                    interviews, remote and in-person usability sessions,
-                    surveys, card sorts, etc.
-                  </li>
-                  <li>
-                    Assisting ongoing research with note-taking and observation
-                  </li>
-                </ul>
               </div>
             </div>
 
