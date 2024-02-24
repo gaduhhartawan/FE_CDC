@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Job from "./pages/Job";
 import About from "./pages/About";
@@ -11,8 +11,10 @@ import MyAccount from "./pages/MyAccount";
 import Jobs from "./pages/Jobs";
 import PostJob from "./pages/PostJob";
 import Notfound from "./pages/Notfound";
+import ProtectedRoute from "./pages/auth/ProtectedRoute";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
   return (
     <BrowserRouter>
       <Routes>
@@ -22,13 +24,27 @@ function App() {
           <Route path="jobs" element={<Jobs />} />
           <Route path="jobs/:id" element={<Job />} />
           <Route path="about" element={<About />} />
-          <Route path="myaccount" element={<MyAccount />} />
+          <Route
+            path="myaccount/:id"
+            element={user ? <MyAccount /> : <Navigate to={"/login"} replace />}
+          />
+          <Route
+            path="postjob"
+            element={
+              user?.isAdmin || user?.isCompany ? (
+                <PostJob />
+              ) : (
+                <Navigate to={"/login"} replace />
+              )
+            }
+          />
         </Route>
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="forgotpassword" element={<ForgotPassword />} />
-        <Route path="resetpassword" element={<Resetpassword />} />
-        <Route path="postjob" element={<PostJob />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="forgotpassword" element={<ForgotPassword />} />
+          <Route path="resetpassword" element={<Resetpassword />} />
+        </Route>
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
@@ -36,3 +52,21 @@ function App() {
 }
 
 export default App;
+
+/*
+  protected
+    layout
+      home
+      jobs
+      jobs/:id
+      about
+    layout
+    myaccount
+    postjob (only admin and company)
+    login
+    register
+    forgot
+    reset
+  protected
+  404
+ */
