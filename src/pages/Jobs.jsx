@@ -10,9 +10,11 @@ const Jobs = () => {
   const [maxSalary, setMaxSalary] = useState("");
   const [jobType, setJobType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [hasMore, setHasMore] = useState(true);
 
+  const [hasMore, setHasMore] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
+
+  const [isFilter, setIsFilter] = useState(false);
 
   const {
     data: jobs,
@@ -28,11 +30,13 @@ const Jobs = () => {
   );
 
   const applyFilters = () => {
+    setIsFilter(true)
     setSelectedCategory("");
     refetch();
   };
 
   const clearFilters = () => {
+    setIsFilter(false)
     setTitle("");
     setLocation("");
     setMinSalary("");
@@ -52,7 +56,7 @@ const Jobs = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectedCategory]);
+  }, [selectedCategory, isFilter]);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -82,6 +86,10 @@ const Jobs = () => {
     {
       title: "Mobile Programmer",
       value: "mobile",
+    },
+    {
+      title: "Marketing",
+      value: "marketing",
     },
   ];
 

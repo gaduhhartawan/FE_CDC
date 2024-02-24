@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+
+import { useState, useEffect, useRef } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
-import {
-  Bars3Icon,
-  XMarkIcon,
-  BellIcon,
-  UserIcon,
-  ArrowLeftStartOnRectangleIcon,
-} from "@heroicons/react/24/outline";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { Bars3Icon, XMarkIcon, BellIcon, UserIcon, ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline";
+import { NavLink, Link, useNavigate} from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
 
 export default function Header() {
@@ -18,7 +13,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const fullname = currentUser?.fullname.split(" ").join("+");
-
+  
   const { mutate } = useLogoutMutation({
     onSuccess: () => {
       localStorage.setItem("currentUser", null);
@@ -29,6 +24,24 @@ export default function Header() {
       });
       navigate("/");
     },
+  });
+
+  const newRef = useRef(null);
+  const handleLogout = () => {
+    setLogout(!logout);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (newRef.current && !newRef.current.contains(e.target)) {
+      setLogout(false);
+    }
+  };
+  
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
   });
 
   return (
@@ -60,12 +73,14 @@ export default function Header() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-7 text-base font-semibold font-plusjakarta leading-6 text-gray-900">
-          <Link
+          <NavLink
             to="/jobs"
-            className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
+            className={({ isActive }) =>
+                        isActive ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2" 
+                        : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2" }
           >
             Find Job
-          </Link>
+          </NavLink>
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
@@ -96,12 +111,14 @@ export default function Header() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-7">
           {currentUser && <BellIcon className="h-7 w-7 lg:flex self-center" />}
           {(currentUser?.isAdmin || currentUser?.isCompany) && (
-            <a
-              href="#"
-              className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center"
+            <NavLink
+              to="/postjob"
+              className={({ isActive }) =>
+                isActive ? "text-base font-extrabold underline underline-offset-2 decoration-bluu decoration-2 font-plusjakarta leading-6 text-gray-900 self-center"
+              : "text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center" }
             >
               Post a Job
-            </a>
+            </NavLink>
           )}
           {currentUser && (
             <img
@@ -111,8 +128,8 @@ export default function Header() {
                   : currentUser?.imgUrl
               }
               alt=""
-              className="w-10 h-10 cursor-pointer rounded-full object-cover"
-              onClick={() => setLogout(!logout)}
+              className="w-10 h-10 cursor-pointer"
+              onClick={handleLogout}
             />
           )}
           {!currentUser && (
@@ -165,7 +182,7 @@ export default function Header() {
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-6 flow-root">
+          <div className="mt-10 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <a

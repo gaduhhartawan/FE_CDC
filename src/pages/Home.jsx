@@ -49,7 +49,7 @@ const Home = () => {
               </h1>
               <div>
                 <Link
-                  href="#"
+                  to="/jobs"
                   className="lg:text-xl font-plusjakarta text-bluu font-bold h-14"
                 >
                   View All Job
