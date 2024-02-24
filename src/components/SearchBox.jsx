@@ -27,7 +27,7 @@ export default function SearchBox({ setlocation, setSearch }) {
         <div className="flex w-3/4 lg:w-full rounded-full bg-search-bar items-center justify-center mx-auto lg:mt-0 mt-2">
           <div className="flex px-3 self-start justify-start h-14 w-1/2 items-center mx-3 gap-2">
             <MagnifyingGlassIcon className="h-5 w-5" />
-            <div className="text-base font-plusjakarta text-black w-full">
+            <div className="lg:text-base text-xs font-plusjakarta text-black w-full">
               <input
                 type="text"
                 placeholder="Find Job"
@@ -40,7 +40,7 @@ export default function SearchBox({ setlocation, setSearch }) {
           <div className="flex h-14 w-1/2 items-center mx-3 gap-2 justify-between">
             <div className="flex h-14 items-center gap-2 w-full">
               <MapPinIcon className="h-5 w-5" />
-              <div className="text-base font-plusjakarta text-black w-full">
+              <div className="lg:text-base text-xs font-plusjakarta text-black w-full">
                 <input
                   type="text"
                   placeholder="Location"
