@@ -34,10 +34,9 @@ export default function PostJob() {
   const [value, setValue] = useState("");
   return (
     <>
-      <Header />
-      <div className="w-full h-screen font-plusjakarta">
-        <div className=" w-full flex flex-col gap-10 items-center justify-center">
-          <div className=" px-10 py-20 rounded-3xl  border-1 border-gray-200">
+      <div className="w-full">
+        <div className=" w-full flex items-center justify-center">
+          <div className="px-5 py-20 rounded-3xl  border-1 border-gray-200">
             <h1 className="font-plusjakarta text-4xl font-semibold text-center ">
               {" "}
               Let {"'"}s find the best candidates <br />
@@ -48,9 +47,7 @@ export default function PostJob() {
               potential job seekers across Indonesia. <br />
               The process is quick and easy, just follow these steps:
             </p>
-            <div className="mt-2"></div>
-
-            <div>
+            <div className="mt-9">
               <div>
                 <label className="text-lg font-medium mt-10">
                   {" "}
