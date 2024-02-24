@@ -146,7 +146,7 @@ const Jobs = () => {
           }`}
         >
           <div className="flex justify-between items-center">
-            <h3 className="font-bold">Filter Job Board</h3>
+            <h3 className="font-bold">Filters</h3>
             <button className="text-gray-400" onClick={clearFilters}>
               Clear
             </button>
@@ -203,14 +203,14 @@ const Jobs = () => {
             <div className="flex justify-between items-center gap-3 mt-1">
               <input
                 type="number"
-                placeholder="min"
+                placeholder="Min"
                 className="w-full rounded-lg py-1 px-3"
                 onChange={(e) => setMinSalary(e.target.value)}
                 value={minSalary}
               />
               <input
                 type="number"
-                placeholder="max"
+                placeholder="Max"
                 className="w-full rounded-lg py-1 px-3"
                 onChange={(e) => setMaxSalary(e.target.value)}
                 value={maxSalary}

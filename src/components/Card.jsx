@@ -22,6 +22,9 @@ const Card = ({ data }) => {
   const date = new Date(data?.createdAt);
   const formattedDate = formatDistanceToNow(date, { addSuffix: true });
 
+  // Job Type Handle more than 1
+  const jobType = data.jobType.join(", ") 
+
   return (
     <Link
       to={`/jobs/${data._id}`}
@@ -37,7 +40,7 @@ const Card = ({ data }) => {
         <div className="flex flex-col">
           <span>{data.companyName}</span>
           <span className="font-bold">{data.jobTitle}</span>
-          <span className="text-gray-500 capitalize">{location} | {data.jobType}</span>
+          <span className="text-gray-500 capitalize">{location} | {jobType}</span>
         </div>
       </div>
       {/* time */}
