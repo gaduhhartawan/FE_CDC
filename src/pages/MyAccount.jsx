@@ -212,7 +212,7 @@ const MyAccount = () => {
             >
               Save Changes
             </button>
-            <button className="bg-gray-200 text-gray-500 py-3 rounded-xl">
+            <button className="bg-gray-200 text-gray-500 py-3 rounded-xl" type="reset">
               Cancel
             </button>
           </div>

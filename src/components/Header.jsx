@@ -128,7 +128,8 @@ export default function Header() {
                   : currentUser?.imgUrl
               }
               alt=""
-              className="w-10 h-10 cursor-pointer"
+              className="w-10 h-10 cursor-pointer rounded-full"
+              ref={newRef}
               onClick={handleLogout}
             />
           )}
@@ -145,7 +146,7 @@ export default function Header() {
         </div>
         {/* logout */}
         {logout && (
-          <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center">
+          <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center" ref={newRef}>
             <div className="flex flex-row items-center justify-center gap-2">
               <UserIcon className="h-6 w-6" />
               <Link to={`/myaccount/${currentUser?._id}`}>My Account</Link>

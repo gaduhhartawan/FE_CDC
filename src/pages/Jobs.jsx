@@ -114,7 +114,7 @@ const Jobs = () => {
           Filter
         </span>
       </div>
-      <div className="mb-5 mt-3 flex gap-4 overflow-x-scroll">
+      <div className="mb-5 mt-3 flex gap-4 overflow-x-scroll lg:overflow-hidden">
         {categories.map((category) => (
           <button
             key={category.title}
@@ -132,7 +132,7 @@ const Jobs = () => {
       {/* List Card */}
       <div className="flex lg:flex-row flex-col-reverse gap-x-5 gap-y-5 relative">
         <div className="flex-1">
-          <InfiniteScroll className="flex flex-col gap-y-5">
+          <InfiniteScroll className="flex flex-col gap-y-5" dataLength={jobs.length}>
             {/* Card */}
             {jobs?.map((job) => (
               <Card key={job._id} data={job} />
