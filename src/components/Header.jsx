@@ -106,7 +106,9 @@ export default function Header() {
           {(currentUser?.isAdmin || currentUser?.isCompany) && (
             <NavLink
               to="/postjob"
-              className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center"
+              className={({ isActive }) =>
+                isActive ? "text-base font-extrabold underline underline-offset-2 decoration-bluu decoration-2 font-plusjakarta leading-6 text-gray-900 self-center"
+              : "text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center" }
             >
               Post a Job
             </NavLink>
