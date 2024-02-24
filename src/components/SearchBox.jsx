@@ -3,15 +3,15 @@ import {
   MapPinIcon,
   MinusIcon,
 } from "@heroicons/react/24/outline";
-import React, { useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 
-export default function SearchBox({setlocation, setSearch}) {
-  const searchRef = useRef(null)
-  const locationRef = useRef(null)
+export default function SearchBox({ setlocation, setSearch }) {
+  const searchRef = useRef(null);
+  const locationRef = useRef(null);
 
   function searchClick() {
-    setSearch(searchRef.current.value)
-    setlocation(locationRef.current.value)
+    setSearch(searchRef.current.value);
+    setlocation(locationRef.current.value);
   }
 
   return (
@@ -19,10 +19,10 @@ export default function SearchBox({setlocation, setSearch}) {
       <img src="bar.svg" className="size-full" />
       <div className="lg:flex flex-col gap-8 absolute items-center">
         <div className="text-white text-st font-plusjakarta font-semibold">
-          Looking for a new opportunities?
+          Looking for new opportunities?
         </div>
         <div className="text-white text-lg font-plusjakarta font-semibold">
-          Browse out latest job openings that you want
+          Browse our latest job openings that you want
         </div>
         <div className="lg:flex flex-row w-full rounded-full bg-search-bar items-center">
           <div className="lg:flex flex-row px-3 self-start justify-start h-14 w-1/2 items-center mx-3 gap-2">
@@ -49,7 +49,10 @@ export default function SearchBox({setlocation, setSearch}) {
                 />
               </div>
             </div>
-            <button className="justify-end rounded-full text-white bg-bluu h-10 w-32 text-base font-plusjakarta mx-4" onClick={searchClick}>
+            <button
+              className="justify-end rounded-full text-white bg-bluu h-10 w-32 text-base font-plusjakarta mx-4"
+              onClick={searchClick}
+            >
               Search
             </button>
           </div>

@@ -42,7 +42,7 @@ export default function About() {
             <DisplayEgg hitung={count} name="Ambatukam" />
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-abt leading-9 font-bold">Our Vision</span>
+            <span className="text-abt leading-9 font-bold ">Our Vision</span>
             <span className="text-textabt text-justify">
               To become the leading career platform in Indonesia that connects
               job seekers with the best job opportunities and helps them reach
@@ -50,7 +50,7 @@ export default function About() {
             </span>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-abt leading-9 font-bold">Our Mission</span>
+            <span className="text-abt leading-9 font-bold ">Our Mission</span>
             <ul className="text-textabt text-justify list-disc ml-5">
               <li>
                 To become the most trusted and comprehensive job portal in
@@ -67,7 +67,7 @@ export default function About() {
             </ul>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-abt leading-9 font-bold">Our Values</span>
+            <span className="text-abt leading-9 font-bold ">Our Values</span>
             <ul className="text-textabt text-justify list-disc ml-5">
               <li>
                 <b>Trust:</b> We are committed to providing accurate and
@@ -88,7 +88,7 @@ export default function About() {
             </ul>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-abt leading-9 font-bold">Featured</span>
+            <span className="text-abt leading-9 font-bold ">Featured</span>
             <span className="text-textabt text-justify">
               <b>Careerpath</b> A premier platform facilitating job seekers in
               finding their ideal jobs and companies in securing exceptional
@@ -106,7 +106,7 @@ export default function About() {
             </span>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-abt leading-9 font-bold">Contact Us</span>
+            <span className="text-abt leading-9 font-bold ">Contact Us</span>
             <span className="text-textabt text-justify">
               If you have any questions or would like to get more information
               about careerpath., please contact us through:

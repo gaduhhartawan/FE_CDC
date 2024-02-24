@@ -11,6 +11,8 @@ import MyAccount from "./pages/MyAccount";
 import Jobs from "./pages/Jobs";
 import PostJob from "./pages/PostJob";
 import Notfound from "./pages/Notfound";
+import WorkingOn from "./pages/Maintenance";
+import PostJobView from "./pages/PostJobView";
 
 function App() {
   return (
@@ -29,6 +31,9 @@ function App() {
         <Route path="forgotpassword" element={<ForgotPassword />} />
         <Route path="resetpassword" element={<Resetpassword />} />
         <Route path="postjob" element={<PostJob />} />
+        <Route path="maintenance" element={<WorkingOn />} />
+        <Route path="postjobview" element={<PostJobView />} />
+
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>

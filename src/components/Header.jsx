@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
-import { Bars3Icon, XMarkIcon, BellIcon, UserIcon, ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline";
-import { NavLink, Link , useLocation} from "react-router-dom";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  BellIcon,
+  UserIcon,
+  ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/react/24/outline";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
 
 export default function Header() {
@@ -10,7 +16,7 @@ export default function Header() {
   const [logout, setLogout] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const fullname = currentUser?.fullname.split(" ").join("+");
-  console.log(location.pathname)
+  console.log(location.pathname);
   const { mutate } = useLogoutMutation({
     onSuccess: () => {
       localStorage.setItem("currentUser", null);
@@ -61,13 +67,13 @@ export default function Header() {
             Companies
           </a> */}
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Scholarship
           </a>
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Career Coaching
@@ -76,8 +82,10 @@ export default function Header() {
             to="/about"
             id="about"
             className={({ isActive }) =>
-                        isActive ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2" 
-                        : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2" }
+              isActive
+                ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2"
+                : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
+            }
           >
             About
           </NavLink>
@@ -86,7 +94,7 @@ export default function Header() {
           {currentUser && <BellIcon className="h-7 w-7 lg:flex self-center" />}
           {(currentUser?.isAdmin || currentUser?.isCompany) && (
             <a
-              href="#"
+              href="/postjob"
               className="text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center"
             >
               Post a Job
@@ -115,13 +123,16 @@ export default function Header() {
         {logout && (
           <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center">
             <div className="flex flex-row items-center justify-center gap-2">
-              <UserIcon className="h-6 w-6"/>
+              <UserIcon className="h-6 w-6" />
               <span>My Account</span>
             </div>
-           <div className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2" onClick={mutate}>
-            <ArrowLeftStartOnRectangleIcon className="h-6 w-6"/>
-            <span>Logout</span>
-           </div>
+            <div
+              className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2"
+              onClick={mutate}
+            >
+              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+              <span>Logout</span>
+            </div>
           </div>
         )}
       </nav>
