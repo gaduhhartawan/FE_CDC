@@ -2,10 +2,38 @@
 import React, { useRef } from "react";
 import JoditEditor from "jodit-react";
 
-import { Jodit } from "jodit-react";
-
 const config = {
-  buttons: ["bold", "italic", "underline", "ol", "ul"],
+  disablePlugins: [
+    "about",
+    "print",
+    "preview",
+    "fullsize",
+    "image",
+    "image-processor",
+    "image-properties",
+    "search",
+    "color",
+    "justify",
+    "indent",
+    "symbols",
+    "link",
+    "table",
+    "hr",
+    "copyformat",
+    "source",
+    "powered-by-jodit",
+    "clipboard",
+    "spellcheck",
+    "speech-recognize",
+    "video",
+    "file",
+    "class-span",
+    "line-height",
+    "format-block",
+    "font",
+    "clean-html"
+  ],
+  sizeLG : "500"
 };
 
 const RichTextEditor = ({ setValue }) => {

@@ -1,17 +1,42 @@
 // import * as React from 'react';
 import Header from "../components/Header";
-
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import RichTextEditor from "../components/RichTextEditor";
 
 export default function PostJob() {
+  const categories = [
+    {
+      title: "Frontend",
+      value: "frontend",
+    },
+    {
+      title: "Backend",
+      value: "backend",
+    },
+    {
+      title: "UI/UX",
+      value: "ui/ux",
+    },
+    {
+      title: "DevOps",
+      value: "devops",
+    },
+    {
+      title: "Mobile Programmer",
+      value: "mobile",
+    },
+    {
+      title: "Marketing",
+      value: "marketing",
+    },
+  ];
   const [value, setValue] = useState("");
   return (
     <>
-      <Header />
-      <div className="w-full h-screen ">
+      <div className="w-full">
         <div className=" w-full flex items-center justify-center">
-          <div className=" px-10 py-20 rounded-3xl  border-1 border-gray-200">
+          <div className="px-5 py-20 rounded-3xl  border-1 border-gray-200">
             <h1 className="font-plusjakarta text-4xl font-semibold text-center ">
               {" "}
               Let {"'"}s find the best candidates <br />
@@ -22,9 +47,7 @@ export default function PostJob() {
               potential job seekers across Indonesia. <br />
               The process is quick and easy, just follow these steps:
             </p>
-            <div className="mt-2"></div>
-
-            <div>
+            <div className="mt-9">
               <div>
                 <label className="text-lg font-medium mt-10">
                   {" "}
@@ -65,12 +88,17 @@ export default function PostJob() {
             </div>
             <div>
               <label className="text-lg font-medium mt-10"> Job Category</label>
-              <input
-                className="w-full  rounded-xl p-4 mt-2 bg-gray-200 text-black"
-                type="numbtexter"
-                id="jobcategory"
-                placeholder="Website Developer"
-              />
+              <div className="flex flex-row w-full justify-end items-center rounded-x">
+                <select className="w-full rounded-xl p-4 mt-2 appearance-none text-black bg-gray-200" id="jobcategory">
+                  <option selected >Choose Category</option>
+                  {categories.map((category) => (
+                    <option value={category.value}>
+                      {category.title}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDownIcon className="w-5 h-5 absolute mr-3 mt-2 pointer-events-none"/>
+              </div>
             </div>
             <div>
               <label className="text-lg font-medium mt-10"> Location</label>

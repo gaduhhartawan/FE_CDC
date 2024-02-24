@@ -26,7 +26,7 @@ export default function About() {
     <>
       {/* <Header /> */}
       <div className="flex flex-col w-full h-full items-center content-center my-8">
-        <div className="flex flex-col w-1/3 h-full font-plusjakarta text-base gap-5">
+        <div className="flex flex-col lg:w-1/3 lg:px-0 px-5 h-full font-plusjakarta text-base gap-5">
           <div className="flex flex-col gap-4">
             <span className="text-center text-abt leading-9 font-medium">
               The Story Behind{" "}

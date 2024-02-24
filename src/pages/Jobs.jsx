@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import JobCard from "../components/JobCard";
 import { useGetJobs } from "../hooks/api/jobs/useJobsQuery";
+import Card from "../components/Card";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Jobs = () => {
   const [title, setTitle] = useState("");
@@ -10,10 +11,14 @@ const Jobs = () => {
   const [jobType, setJobType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  const [hasMore, setHasMore] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+
+  const [isFilter, setIsFilter] = useState(false);
+
   const {
     data: jobs,
     isLoading,
-    status,
     refetch,
   } = useGetJobs(
     title,
@@ -25,11 +30,13 @@ const Jobs = () => {
   );
 
   const applyFilters = () => {
+    setIsFilter(true)
     setSelectedCategory("");
     refetch();
   };
 
   const clearFilters = () => {
+    setIsFilter(false)
     setTitle("");
     setLocation("");
     setMinSalary("");
@@ -49,13 +56,11 @@ const Jobs = () => {
 
   useEffect(() => {
     refetch();
-  }, [selectedCategory]);
+  }, [selectedCategory, isFilter]);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
-  const data = jobs?.slice(0, 8);
 
   const categories = [
     {
@@ -82,10 +87,14 @@ const Jobs = () => {
       title: "Mobile Programmer",
       value: "mobile",
     },
+    {
+      title: "Marketing",
+      value: "marketing",
+    },
   ];
 
   return (
-    <div className="relative">
+    <div className="lg:px-0 px-5 relative">
       <div className="text-center mb-10">
         <h2 className="font-bold text-3xl mb-1">
           Explore a world of possibilities with Top Companies
@@ -96,15 +105,23 @@ const Jobs = () => {
         </span>
       </div>
       {/* category */}
-      <h2 className="font-bold text-2xl">Popular Category</h2>
-      <div className="mb-5 mt-3 flex gap-4">
+      <div className="flex justify-between items-center">
+        <h2 className="font-bold lg:text-2xl text-xl">Popular Category</h2>
+        <span
+          className="cursor-pointer lg:hidden block"
+          onClick={() => setShowFilter((prev) => !prev)}
+        >
+          Filter
+        </span>
+      </div>
+      <div className="mb-5 mt-3 flex gap-4 overflow-x-scroll">
         {categories.map((category) => (
           <button
             key={category.title}
-            className={`py-1 px-4 rounded-full ${
+            className={`py-1 px-12 rounded-full ${
               selectedCategory === category.value
                 ? "bg-blue-600 text-white"
-                : "bg-blue-300 text-gray-700"
+                : "bg-blue-200 text-bluu"
             }`}
             onClick={() => handleCategoryClick(category.value)}
           >
@@ -113,14 +130,21 @@ const Jobs = () => {
         ))}
       </div>
       {/* List Card */}
-      <div className="flex relative">
-        <div className="flex-1 grid grid-cols-4 gap-y-5">
-          {/* Card */}
-          {data?.map((job) => (
-            <JobCard key={job._id} data={job} />
-          ))}
+      <div className="flex lg:flex-row flex-col-reverse gap-x-5 gap-y-5 relative">
+        <div className="flex-1">
+          <InfiniteScroll className="flex flex-col gap-y-5">
+            {/* Card */}
+            {jobs?.map((job) => (
+              <Card key={job._id} data={job} />
+            ))}
+          </InfiniteScroll>
         </div>
-        <div className="bg-gray-200 py-10 rounded-lg px-5 max-h-[530px] max-w-64 sticky top-32">
+        {/* filter */}
+        <div
+          className={`bg-[#EFEFEF] py-10 rounded-lg px-5 max-h-[530px] lg:max-w-64 lg:sticky lg:top-32 lg:block ${
+            showFilter ? "block" : "hidden"
+          }`}
+        >
           <div className="flex justify-between items-center">
             <h3 className="font-bold">Filter Job Board</h3>
             <button className="text-gray-400" onClick={clearFilters}>
@@ -168,7 +192,7 @@ const Jobs = () => {
                 onChange={(e) => setJobType(e.target.value)}
                 value={jobType}
               >
-                <option>Pilih Job Type</option>
+                <option>Choose Job Type</option>
                 <option value="fulltime">Full-time</option>
                 <option value="parttime">Part-time</option>
                 <option value="internship">Internship</option>
