@@ -17,18 +17,21 @@ const Card = ({ data }) => {
 
   // Img name
   const fullname = data.companyName.split(" ").join("+");
-  
+
   // date
   const date = new Date(data?.createdAt);
   const formattedDate = formatDistanceToNow(date, { addSuffix: true });
 
+  // Job Type Handle more than 1
+  const jobType = data.jobType.join(", ") 
+
   return (
     <Link
       to={`/jobs/${data._id}`}
-      className="flex justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
+      className="flex lg:flex-row flex-col lg:gap-y-0 gap-y-4  justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
     >
       {/* user */}
-      <div className="flex items-center gap-4">
+      <div className="flex lg:flex-row flex-col items-center gap-4 text-center lg:text-left">
         <img
           src={`https://ui-avatars.com/api/?name=${fullname}&background=D9D9D9`}
           className="rounded-full"
@@ -37,7 +40,7 @@ const Card = ({ data }) => {
         <div className="flex flex-col">
           <span>{data.companyName}</span>
           <span className="font-bold">{data.jobTitle}</span>
-          <span className="text-gray-500 capitalize">{location} | {data.jobType}</span>
+          <span className="text-gray-500 capitalize">{location} | {jobType}</span>
         </div>
       </div>
       {/* time */}

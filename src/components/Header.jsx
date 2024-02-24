@@ -1,15 +1,19 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
 import { Bars3Icon, XMarkIcon, BellIcon, UserIcon, ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline";
-import { NavLink, Link} from "react-router-dom";
+import { NavLink, Link, useNavigate} from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logout, setLogout] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const navigate = useNavigate();
+
   const fullname = currentUser?.fullname.split(" ").join("+");
+
   const { mutate } = useLogoutMutation({
     onSuccess: () => {
       localStorage.setItem("currentUser", null);
@@ -18,6 +22,7 @@ export default function Header() {
         pauseOnHover: false,
         position: "bottom-right",
       });
+      navigate("/");
     },
   });
 
@@ -40,7 +45,7 @@ export default function Header() {
   });
 
   return (
-    <header className="bg-white sticky top-0 z-50">
+    <header className="bg-white sticky px-3 lg:px-10 top-0 z-40">
       <nav
         className="h-28 mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8 relative"
         aria-label="Global"
@@ -80,13 +85,13 @@ export default function Header() {
             Companies
           </a> */}
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Scholarship
           </a>
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Career Coaching
@@ -95,8 +100,10 @@ export default function Header() {
             to="/about"
             id="about"
             className={({ isActive }) =>
-                        isActive ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2" 
-                        : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2" }
+              isActive
+                ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2"
+                : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
+            }
           >
             About
           </NavLink>
@@ -115,9 +122,14 @@ export default function Header() {
           )}
           {currentUser && (
             <img
-              src={`https://ui-avatars.com/api/?name=${fullname}&rounded=true`}
+              src={
+                currentUser?.imgUrl === "None"
+                  ? `https://ui-avatars.com/api/?name=${fullname}`
+                  : currentUser?.imgUrl
+              }
               alt=""
-              className="w-10 h-10 cursor-pointer"
+              className="w-10 h-10 cursor-pointer rounded-full"
+              ref={newRef}
               onClick={handleLogout}
             />
           )}
@@ -134,15 +146,18 @@ export default function Header() {
         </div>
         {/* logout */}
         {logout && (
-          <div className=" absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center" ref={newRef}>
-            <Link to="/myaccount" className="flex flex-row items-center justify-center gap-2">
-              <UserIcon className="h-6 w-6"/>
-              <span>My Account</span>
-            </Link>
-           <div className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2" onClick={mutate}>
-            <ArrowLeftStartOnRectangleIcon className="h-6 w-6"/>
-            <span>Logout</span>
-           </div>
+          <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center" ref={newRef}>
+            <div className="flex flex-row items-center justify-center gap-2">
+              <UserIcon className="h-6 w-6" />
+              <Link to={`/myaccount/${currentUser?._id}`}>My Account</Link>
+            </div>
+            <div
+              className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2"
+              onClick={mutate}
+            >
+              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+              <span>Logout</span>
+            </div>
           </div>
         )}
       </nav>
@@ -152,8 +167,8 @@ export default function Header() {
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
       >
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="fixed inset-0 z-50" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>

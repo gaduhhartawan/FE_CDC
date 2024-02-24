@@ -7,7 +7,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white px-3 lg:px-10">
       <nav
         className="h-28 mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -31,9 +31,9 @@ export default function Header() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-5 mr-5 font-plusjakarta font-medium">
+        <Popover.Group className="hidden lg:flex lg:gap-x-7 mr-5 font-plusjakarta font-medium">
           <a
-            href="#"
+            href="/jobs"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Find Job
@@ -42,19 +42,19 @@ export default function Header() {
             Companies
           </a> */}
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Scholarship
           </a>
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Career Coaching
           </a>
           <a
-            href="#"
+            href="/about"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             About

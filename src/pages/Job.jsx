@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useGetJob } from "../hooks/api/jobs/useJobsQuery";
 
-
 const Job = () => {
   const { id } = useParams();
   const { data: job, isLoading } = useGetJob(id);
@@ -45,7 +44,7 @@ const Job = () => {
         {/* Content */}
         <div>
           {/* user */}
-          <div className="flex items-center justify-between max-w-5xl">
+          <div className="flex lg:flex-row flex-col lg:items-center items-start justify-between max-w-5xl">
             {/* user */}
             <div className="flex items-center gap-5 my-5">
               <img
@@ -53,7 +52,7 @@ const Job = () => {
                 alt="company_img"
                 className="w-20 h-20 rounded-full"
               />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <h2 className="text-2xl font-semibold">{job.jobTitle}</h2>
                 <div className="flex gap-2">
                   <span className="text-sm font-semibold">
@@ -62,7 +61,7 @@ const Job = () => {
                   {job.jobType.map((type) => (
                     <span
                       key={type}
-                      className="rounded-md bg-blue-500 text-white text-sm uppercase px-2"
+                      className="rounded-md bg-blue-500 text-white text-sm uppercase px-2 flex items-center"
                     >
                       {type}
                     </span>
@@ -71,42 +70,27 @@ const Job = () => {
               </div>
             </div>
             {/* button */}
-            <a href={linkJob} target="_blank" className="bg-blue-500 text-white px-5 py-2 rounded-md">
+            <a
+              href={linkJob}
+              target="_blank"
+              className="bg-blue-500 text-white px-5 py-2 rounded-md"
+            >
               Apply Now
             </a>
           </div>
 
-          <div className="flex gap-10">
+          <div className="flex lg:flex-row flex-col-reverse lg:gap-10 gap-5 lg:mt-0 mt-8">
             <div className="left flex-[2]">
               {/* Job Description */}
               <div className="flex flex-col gap-1 my-3">
                 <h2 className="text-2xl font-semibold">Job Description</h2>
                 <p className="font-light text-justify">{job.jobDesc}</p>
-                {/* <ul className="list-disc ml-5 font-light">
-                  <li>
-                    Participate in and support product design and user research
-                    activities.
-                  </li>
-                  <li>
-                    Planning and conducting user research studies, such as
-                    interviews, remote and in-person usability sessions,
-                    surveys, card sorts, etc.
-                  </li>
-                  <li>
-                    Assisting ongoing research with note-taking and observation
-                  </li>
-                  <li>
-                    Have the ability to write testing scripts, track and manage
-                    data, and present findings
-                  </li>
-                  <li>Willingness to help recruit and schedule participants</li>
-                </ul> */}
               </div>
             </div>
 
             <div className="right flex-[1] flex flex-col gap-2">
               <h2 className="text-2xl font-semibold">Job Overview</h2>
-              <div className="bg-blue-200 rounded-md grid grid-cols-2 p-5 gap-5">
+              <div className="bg-blue-200 rounded-md grid lg:grid-cols-2 grid-cols-1 p-5 gap-5">
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Job Location</h3>
                   <span>{location}</span>
@@ -121,7 +105,9 @@ const Job = () => {
                 </div>
                 <div className="text-lg font-semibold text-center">
                   <h3 className="text-gray-400">Salary Monthly</h3>
-                  <span>{job.salaryNum ? "IDR " + job.salaryNum : "Undisclosed"}</span>
+                  <span>
+                    {job.salaryNum ? "IDR " + job.salaryNum : "Undisclosed"}
+                  </span>
                 </div>
               </div>
             </div>
