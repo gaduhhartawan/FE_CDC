@@ -13,7 +13,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const fullname = currentUser?.fullname.split(" ").join("+");
-  
+
   const { mutate } = useLogoutMutation({
     onSuccess: () => {
       localStorage.setItem("currentUser", null);
@@ -85,13 +85,13 @@ export default function Header() {
             Companies
           </a> */}
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Scholarship
           </a>
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Career Coaching

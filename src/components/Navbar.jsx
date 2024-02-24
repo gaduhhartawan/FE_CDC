@@ -33,7 +33,7 @@ export default function Header() {
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-5 mr-5 font-plusjakarta font-medium">
           <a
-            href="#"
+            href="/jobs"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Find Job
@@ -42,19 +42,19 @@ export default function Header() {
             Companies
           </a> */}
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Scholarship
           </a>
           <a
-            href="#"
+            href="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Career Coaching
           </a>
           <a
-            href="#"
+            href="/about"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             About

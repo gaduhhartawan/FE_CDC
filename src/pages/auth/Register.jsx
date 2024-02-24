@@ -54,7 +54,7 @@ export default function RegisterPage() {
   return (
     <>
       <div className="w-full flex items-center justify-center">
-        <div className="px-10 py-20 rounded-3xl  border-1 border-gray-200 ">
+        <div className="font-plusjakarta px-10 py-20 rounded-3xl  border-1 border-gray-200 ">
           <h1 className="text-5xl font-semibold">Get Started Now!</h1>
           <p className="font-italic text-lg text-gray-500 mt-3">
             Be part of our growing professional community and <br />
@@ -63,7 +63,9 @@ export default function RegisterPage() {
           <form className="mt-4" onSubmit={handleSubmit}>
             <div>
               <div>
-                <label className="text-lg font-medium">Full Name</label>
+                <label className="font-plusjakarta text-lg font-medium">
+                  Full Name
+                </label>
                 <input
                   className="w-full  rounded-xl p-4 mt-2 mb-3 bg-gray-200"
                   type="text"
@@ -75,7 +77,9 @@ export default function RegisterPage() {
                 />
               </div>
               <div>
-                <label className="text-lg font-medium">Email</label>
+                <label className="font-plusjakarta text-lg font-medium">
+                  Email
+                </label>
                 <input
                   className="w-full  rounded-xl p-4 mt-2 mb-3 bg-gray-200"
                   type="email"
@@ -87,7 +91,10 @@ export default function RegisterPage() {
                 />
               </div>
               <div>
-                <label className="text-lg font-medium mt-5"> Password</label>
+                <label className="font-plusjakarta text-lg font-medium mt-5">
+                  {" "}
+                  Password
+                </label>
                 <input
                   className="w-full  rounded-xl p-4 mt-2 bg-gray-200 text-black"
                   type="password"
@@ -98,7 +105,7 @@ export default function RegisterPage() {
                 />
               </div>
               <div>
-                <label className="text-lg font-medium mt-5">
+                <label className="font-plusjakarta text-lg font-medium mt-5">
                   Confirm Password
                 </label>
                 <input
@@ -112,7 +119,7 @@ export default function RegisterPage() {
               {confPassword !== user.password && confPassword && (
                 <p className="mt-1 text-red-500">Password doesn{"'"}t match</p>
               )}
-              <div className="my-5 flex items-center gap-2">
+              <div className=" font-plusjakarta my-5 flex items-center gap-2">
                 <input
                   className="w-4 h-4 cursor-pointer"
                   type="checkbox"
@@ -124,12 +131,12 @@ export default function RegisterPage() {
                   htmlFor="isCompany"
                   className="font-plusjakarta cursor-pointer"
                 >
-                  Daftar sebagai company.
+                  Create a Company Account.
                 </label>
               </div>
 
               <div>
-                <div className="mt-3 flex flex-col gap-y-4 text-white">
+                <div className=" font-plusjakarta mt-3 flex flex-col gap-y-4 text-white">
                   <button
                     type="submit"
                     className=" active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all py-4 rounded-xl bg-blue-500 text-white font-bold"
@@ -140,12 +147,12 @@ export default function RegisterPage() {
               </div>
             </div>
           </form>
-          <div className="mt-6 justify-center text-center">
+          <div className="font-plusjakarta mt-6 justify-center text-center">
             <div className="font-plusjakarta font-italic text-base">
               Already have an account?
               <Link
                 to="/login"
-                className="text-blue-500 hover:underline hover:text-blue-600 ml-1"
+                className="font-plusjakarta text-blue-500 hover:underline hover:text-blue-600 ml-1"
               >
                 Log in here.
               </Link>
