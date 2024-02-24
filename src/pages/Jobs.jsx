@@ -177,7 +177,7 @@ const Jobs = () => {
                 value={jobType}
               >
                 <option>Pilih Job Type</option>
-                <option value="fulltime">Full-time</option>
+                <option value="fulltime">Fulltime</option>
                 <option value="parttime">Part-time</option>
                 <option value="internship">Internship</option>
               </select>
