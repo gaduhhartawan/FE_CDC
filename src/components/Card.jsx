@@ -12,12 +12,12 @@ const Card = ({ data }) => {
   } else {
     location = parts[0].trim();
   }
-  
+
   // const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
 
   // Img name
   const fullname = data.companyName.split(" ").join("+");
-  
+
   // date
   const date = new Date(data?.createdAt);
   const formattedDate = formatDistanceToNow(date, { addSuffix: true });
@@ -25,10 +25,10 @@ const Card = ({ data }) => {
   return (
     <Link
       to={`/jobs/${data._id}`}
-      className="flex justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
+      className="flex lg:flex-row flex-col lg:gap-y-0 gap-y-4  justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
     >
       {/* user */}
-      <div className="flex items-center gap-4">
+      <div className="flex lg:flex-row flex-col items-center gap-4 text-center lg:text-left">
         <img
           src={`https://ui-avatars.com/api/?name=${fullname}&background=D9D9D9`}
           className="rounded-full"

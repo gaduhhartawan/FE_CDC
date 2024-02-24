@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const { mutate } = useLoginMutation({
@@ -24,11 +25,23 @@ export default function LoginPage() {
         navigate("/");
       }, 1500);
     },
+    onMutate: () => setIsLoading(true),
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate({ email, password });
+    mutate(
+      { email, password },
+      {
+        onError: () => {
+          toast.error("Invalid Credentials", {
+            position: "bottom-right",
+            pauseOnHover: false,
+          });
+          setIsLoading(false);
+        },
+      }
+    );
   };
 
   return (
@@ -80,7 +93,7 @@ export default function LoginPage() {
                   type="submit"
                   className="active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all py-4 rounded-xl bg-blue-500 text-white font-bold"
                 >
-                  Sign In
+                  Sign In {isLoading && "..."}
                 </button>
               </div>
             </div>
