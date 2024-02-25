@@ -7,4 +7,47 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
+
+.custom-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #a4a4a4;
+  border-right-color: #f4f4f4;
+  animation: s2 1s infinite linear;
+}
+@keyframes s2 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.chat::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat::-webkit-scrollbar-track {
+  background-color: #555;
+}
+
+/* Handle */
+.chat::-webkit-scrollbar-thumb {
+  background: black;
+}
+
+/* All */
+/* ::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+  background: #387af4;
+} */

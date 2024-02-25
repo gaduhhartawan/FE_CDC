@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useGetJobs } from "../hooks/api/jobs/useJobsQuery";
 import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ArrowUpIcon } from "@heroicons/react/24/solid";
 
 const Jobs = () => {
   const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ const Jobs = () => {
   const [jobType, setJobType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const [hasMore, setHasMore] = useState(true);
+  const scrollRef = useRef(null);
   const [showFilter, setShowFilter] = useState(false);
 
   const [isFilter, setIsFilter] = useState(false);
@@ -28,6 +29,8 @@ const Jobs = () => {
     jobType,
     selectedCategory
   );
+
+  const onScrollTop = () => scrollRef.current.scrollIntoView();
 
   const applyFilters = () => {
     setIsFilter(true);
@@ -94,7 +97,7 @@ const Jobs = () => {
   ];
 
   return (
-    <div className="lg:px-0 px-5">
+    <div className="lg:px-0 px-5" ref={scrollRef}>
       <div className="text-center mb-10">
         <h2 className="font-bold text-3xl mb-1">
           Explore a world of possibilities with Top Companies
@@ -228,6 +231,12 @@ const Jobs = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div
+        className="fixed bottom-5 right-5 bg-white rounded-full p-3 border border-gray-500 cursor-pointer"
+        onClick={onScrollTop}
+      >
+        <ArrowUpIcon className="h-4 w-4" />
       </div>
     </div>
   );

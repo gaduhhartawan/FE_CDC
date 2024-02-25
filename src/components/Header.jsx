@@ -59,10 +59,10 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img className="h-8 w-auto" src="/ico.png" alt="" />
-          </a>
+          </Link>
           <Link
             to="/"
             className="mx-2 flex text-3xl font-bold font-plusjakarta tracking-tight"
@@ -94,18 +94,18 @@ export default function Header() {
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
-          <a
-            href="/maintenance"
+          <Link
+            to="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Scholarship
-          </a>
-          <a
-            href="/maintenance"
+          </Link>
+          <Link
+            to="/coaching"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Career Coaching
-          </a>
+          </Link>
           <NavLink
             to="/about"
             id="about"
@@ -118,7 +118,7 @@ export default function Header() {
             About
           </NavLink>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-7">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center lg:gap-x-4">
           {currentUser && <BellIcon className="h-7 w-7 lg:flex self-center" />}
           {(currentUser?.isAdmin || currentUser?.isCompany) && (
             <NavLink
@@ -133,17 +133,22 @@ export default function Header() {
             </NavLink>
           )}
           {currentUser && (
-            <img
-              src={
-                currentUser?.imgUrl === "None"
-                  ? `https://ui-avatars.com/api/?name=${fullname}`
-                  : currentUser?.imgUrl
-              }
-              alt=""
-              className="w-10 h-10 cursor-pointer rounded-full"
-              ref={newRef}
-              onClick={handleLogout}
-            />
+            <>
+              <span className="capitalize">
+                Hi, {currentUser?.fullname.split(" ")[0]}
+              </span>
+              <img
+                src={
+                  currentUser?.imgUrl === "None"
+                    ? `https://ui-avatars.com/api/?name=${fullname}`
+                    : currentUser?.imgUrl
+                }
+                alt=""
+                className="w-10 h-10 cursor-pointer rounded-full"
+                ref={newRef}
+                onClick={handleLogout}
+              />
+            </>
           )}
           {!currentUser && (
             <Link
@@ -223,7 +228,7 @@ export default function Header() {
                   Scholarship
                 </Link>
                 <Link
-                  to="/maintenance"
+                  to="/coaching"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Career Coaching
