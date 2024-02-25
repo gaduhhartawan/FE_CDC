@@ -3,8 +3,11 @@ import Header from "../components/Header";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import RichTextEditor from "../components/RichTextEditor";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function PostJob() {
+  const navigate = useNavigate();
   const categories = [
     {
       title: "Frontend",
@@ -32,6 +35,21 @@ export default function PostJob() {
     },
   ];
   const [value, setValue] = useState("");
+
+  const onCancelClick = () => {
+    Swal.fire({
+      icon: "question",
+      title: "Cancel Job Posting?",
+      text: "This action cannot be undone. The job posting will be removed from the system.",
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: "#E54335",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+    });
+  };
   return (
     <>
       <div className="w-full">
@@ -89,15 +107,18 @@ export default function PostJob() {
             <div>
               <label className="text-lg font-medium mt-10"> Job Category</label>
               <div className="flex flex-row w-full justify-end items-center rounded-x">
-                <select className="w-full rounded-xl p-4 mt-2 appearance-none text-black bg-gray-200" id="jobcategory">
-                  <option selected >Choose Category</option>
+                <select
+                  className="w-full rounded-xl p-4 mt-2 appearance-none text-black bg-gray-200"
+                  id="jobcategory"
+                >
+                  <option selected>Choose Category</option>
                   {categories.map((category) => (
-                    <option value={category.value}>
+                    <option key={category.value} value={category.value}>
                       {category.title}
                     </option>
                   ))}
                 </select>
-                <ChevronDownIcon className="w-5 h-5 absolute mr-3 mt-2 pointer-events-none"/>
+                <ChevronDownIcon className="w-5 h-5 absolute mr-3 mt-2 pointer-events-none" />
               </div>
             </div>
             <div>
@@ -135,7 +156,11 @@ export default function PostJob() {
             </div>
             <div>
               <div className="mt-3  flex flex-col gap-y-4 text-white">
-                <button className=" active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all py-4 rounded-xl bg-blue-300 text-white font-bold">
+                <button
+                  type="button"
+                  className=" active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all py-4 rounded-xl bg-blue-300 text-white font-bold"
+                  onClick={onCancelClick}
+                >
                   Cancel
                 </button>
               </div>

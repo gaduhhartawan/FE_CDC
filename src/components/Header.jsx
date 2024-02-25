@@ -1,9 +1,14 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
-import { Bars3Icon, XMarkIcon, BellIcon, UserIcon, ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline";
-import { NavLink, Link, useNavigate} from "react-router-dom";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  BellIcon,
+  UserIcon,
+  ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/react/24/outline";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
 
 export default function Header() {
@@ -36,7 +41,7 @@ export default function Header() {
       setLogout(false);
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
@@ -76,8 +81,10 @@ export default function Header() {
           <NavLink
             to="/jobs"
             className={({ isActive }) =>
-                        isActive ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2" 
-                        : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2" }
+              isActive
+                ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2"
+                : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
+            }
           >
             Find Job
           </NavLink>
@@ -114,8 +121,10 @@ export default function Header() {
             <NavLink
               to="/postjob"
               className={({ isActive }) =>
-                isActive ? "text-base font-extrabold underline underline-offset-2 decoration-bluu decoration-2 font-plusjakarta leading-6 text-gray-900 self-center"
-              : "text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center" }
+                isActive
+                  ? "text-base font-extrabold underline underline-offset-2 decoration-bluu decoration-2 font-plusjakarta leading-6 text-gray-900 self-center"
+                  : "text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center"
+              }
             >
               Post a Job
             </NavLink>
@@ -146,7 +155,10 @@ export default function Header() {
         </div>
         {/* logout */}
         {logout && (
-          <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center" ref={newRef}>
+          <div
+            className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center"
+            ref={newRef}
+          >
             <div className="flex flex-row items-center justify-center gap-2">
               <UserIcon className="h-6 w-6" />
               <Link to={`/myaccount/${currentUser?._id}`}>My Account</Link>
@@ -170,10 +182,10 @@ export default function Header() {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img className="h-8 w-auto" src="ico.png" alt="" />
-            </a>
+            </Link>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -186,38 +198,57 @@ export default function Header() {
           <div className="mt-10 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/jobs"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Find Job
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Scholarship
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Career Coaching
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   About
-                </a>
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
+                {currentUser ? (
+                  <>
+                    <Link
+                      to={`/myaccount/${currentUser?._id}`}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      My Account
+                    </Link>
+
+                    <button
+                      to="/login"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      onClick={mutate}
+                    >
+                      Log out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -31,34 +31,34 @@ export default function Header() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-7 mr-5 font-plusjakarta font-medium">
-          <a
-            href="/jobs"
+        <Popover.Group className="hidden lg:flex lg:gap-x-5 mr-5 font-plusjakarta font-medium">
+          <Link
+            to="/jobs"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Find Job
-          </a>
+          </Link>
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
-          <a
-            href="/maintenance"
+          <Link
+            to="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Scholarship
-          </a>
-          <a
-            href="/maintenance"
+          </Link>
+          <Link
+            to="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Career Coaching
-          </a>
-          <a
-            href="/about"
+          </Link>
+          <Link
+            to="/about"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             About
-          </a>
+          </Link>
         </Popover.Group>
       </nav>
       <Dialog
@@ -86,38 +86,38 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/jobs"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Find Job
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Scholarship
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Career Coaching
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   About
-                </a>
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
