@@ -63,7 +63,7 @@ const Jobs = () => {
   }
 
   const categories = [
-    {
+    { 
       title: "All Job",
       value: "",
     },

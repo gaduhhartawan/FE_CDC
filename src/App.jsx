@@ -14,6 +14,7 @@ import Notfound from "./pages/Notfound";
 import WorkingOn from "./pages/Maintenance";
 import PostJobView from "./pages/PostJobView";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
+import PostJobEdit from "./pages/PostJobEdit";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -49,6 +50,7 @@ function App() {
         </Route>
         <Route path="maintenance" element={<WorkingOn />} />
         <Route path="postjobview" element={<PostJobView />} />
+        <Route path="postjobedit" element={<PostJobEdit />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
