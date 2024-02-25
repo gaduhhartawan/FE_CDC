@@ -49,9 +49,9 @@ const Chat = () => {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen">
       <Header />
-      <div className="flex flex-col md:h-[450px] xl:h-[500px] w-full overflow-y-scroll">
+      <div className="flex flex-col w-full overflow-y-scroll h-[78%]">
         <div className="flex-1 overflow-y-scroll p-4 flex flex-col items-center gap-5 w-full chat">
           {!messages.length ? (
             <div className="flex flex-col gap-y-5 justify-center text-center">
@@ -102,7 +102,7 @@ const Chat = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="flex w-full max-w-lg justify-between items-center mt-8 mx-auto border-2 border-gray-400 rounded-full bg-[#E7EEFE]"
+          className="flex w-full max-w-[80%] justify-between items-center mt-8 mx-auto border-2 border-gray-400 rounded-full bg-[#E7EEFE]"
         >
           <input
             type="text"

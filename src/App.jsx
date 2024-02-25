@@ -16,6 +16,7 @@ import PostJobView from "./pages/PostJobView";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import Chat from "./pages/Chat";
 import Coaching from "./pages/Coaching";
+import Welcome from "./pages/Welcome";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -59,6 +60,7 @@ function App() {
         </Route>
         <Route path="maintenance" element={<WorkingOn />} />
         <Route path="postjobview" element={<PostJobView />} />
+        <Route path="welcome" element={<Welcome />} />
         <Route path="coaching/chat" element={<Chat />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
@@ -67,21 +69,3 @@ function App() {
 }
 
 export default App;
-
-/*
-  protected
-    layout
-      home
-      jobs
-      jobs/:id
-      about
-    layout
-    myaccount
-    postjob (only admin and company)
-    login
-    register
-    forgot
-    reset
-  protected
-  404
- */

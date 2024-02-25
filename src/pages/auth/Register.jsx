@@ -15,7 +15,8 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   const { mutate, error } = useRegisterMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
+      localStorage.setItem("currentUser", JSON.stringify(data.data.user));
       setUser({
         fullname: "",
         email: "",
@@ -25,12 +26,12 @@ export default function RegisterPage() {
 
       setConfPassword("");
 
-      toast.success("Register Berhasil!", {
+      toast.success("Register Successfully!", {
         pauseOnHover: false,
         position: "bottom-right",
       });
 
-      navigate("/login");
+      navigate("/welcome");
     },
   });
 
