@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../../utils/axios";
 
 export const useGetJobs = (
@@ -43,5 +43,12 @@ export const useGetMyJob = (userId) => {
     queryKey: [userId],
     queryFn: async () =>
       await axiosInstance.get(`/jobs/myjobs/${userId}`).then((res) => res.data),
+  });
+};
+
+export const postJob = ({ onSuccess }) => {
+  return useMutation({
+    mutationFn: async (job) => await axiosInstance.post("/jobs", { ...job }),
+    onSuccess,
   });
 };
