@@ -11,7 +11,6 @@ import MyAccount from "./pages/MyAccount";
 import Jobs from "./pages/Jobs";
 import PostJob from "./pages/PostJob";
 import Notfound from "./pages/Notfound";
-// import CareerCoach from "./pages/CareerCoach";
 import WorkingOn from "./pages/Maintenance";
 import PostJobView from "./pages/PostJobView";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
@@ -51,7 +50,6 @@ function App() {
         <Route path="maintenance" element={<WorkingOn />} />
         <Route path="postjobview" element={<PostJobView />} />
         <Route path="*" element={<Notfound />} />
-        {/* <Route path="testcoach" element={<CareerCoach />} /> */}
       </Routes>
     </BrowserRouter>
   );
