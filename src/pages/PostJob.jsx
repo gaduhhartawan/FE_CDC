@@ -30,7 +30,7 @@ export default function PostJob() {
     setJob((prev) => {
       return { ...prev, jobDesc: value };
     });
-  }, [value, job]);
+  }, [value]);
 
   const handleChange = (e) => {
     setJob((prev) => {
@@ -95,8 +95,6 @@ export default function PostJob() {
     },
   ];
 
-  console.log(job);
-
   const { mutate, error } = usePostJob({
     onSuccess: () => {
       setJob({
@@ -112,7 +110,7 @@ export default function PostJob() {
         jobLink :"",
       });
 
-      toast.success("Register Berhasil!", {
+      toast.success("Succesfully Posted!", {
         pauseOnHover: false,
         position: "bottom-right",
       });

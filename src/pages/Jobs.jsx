@@ -3,6 +3,8 @@ import { useGetJobs } from "../hooks/api/jobs/useJobsQuery";
 import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ArrowUpIcon } from "@heroicons/react/24/solid";
+import Loading from "../components/Loading";
+import NoJobs from "../components/NoJobs";
 
 const Jobs = () => {
   const [title, setTitle] = useState("");
@@ -62,7 +64,7 @@ const Jobs = () => {
   }, [selectedCategory, isFilter]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading isLoading={isLoading}/>;
   }
 
   const categories = [
@@ -95,7 +97,7 @@ const Jobs = () => {
       value: "marketing",
     },
   ];
-
+  
   return (
     <div className="lg:px-0 px-5" ref={scrollRef}>
       <div className="text-center mb-10">
@@ -135,6 +137,7 @@ const Jobs = () => {
       {/* List Card */}
       <div className="flex lg:flex-row flex-col-reverse gap-x-5 gap-y-5 relative">
         <div className="flex-1">
+          <NoJobs data={jobs?.length} />
           <InfiniteScroll
             className="flex flex-col gap-y-5"
             dataLength={jobs.length}

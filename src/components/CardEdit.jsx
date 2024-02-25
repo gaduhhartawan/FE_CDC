@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { format, formatDistanceToNow } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -6,12 +6,12 @@ import { toast } from "react-toastify";
 import { useDeleteJob } from "../hooks/api/jobs/useJobsQuery";
 import Swal from "sweetalert2";
 
-const CardEdit = ({ data }) => {
+const CardEdit = ({ data , setShowModal, setCurrentJob}) => {
   const queryClient = useQueryClient();
   const parts = data?.jobLocation.split(",");
   const { mutate } = useDeleteJob({
     onSuccess: () => {
-      toast.success("Deleted Succesfuly!", {
+      toast.success("Job Deleted Succesfuly!", {
       pauseOnHover: false,
       position: "bottom-right",
       });
@@ -25,8 +25,6 @@ const CardEdit = ({ data }) => {
   } else {
     location = parts[0].trim();
   }
-
-  // const date = format(new Date(data?.createdAt), "dd-MM-yyyy");
 
   // Img name
   const fullname = data.companyName.split(" ").join("+");
@@ -70,17 +68,22 @@ const CardEdit = ({ data }) => {
         </div>
       </div>
       {/* time */}
-      <div className="flex flex-row gap-4">
-        <Link to="/">
+      <div className="flex flex-col items-center gap-y-2">
+        <span className="capitalize">{formattedDate}</span>
+        <div className="flex flex-row gap-4">
+          <Link onClick={() => ( 
+            setShowModal(true),
+            setCurrentJob(data))}>
           <button className="bg-bluu rounded-md w-20 h-8 text-white">
             Edit
           </button>
-        </Link>
-        <Link>
-          <button className="bg-red-500 rounded-md w-20 h-8 text-white" onClick={onConfirmClick}>
-            Delete
-          </button>
-        </Link>
+          </Link>
+          <Link onClick={onConfirmClick}>
+            <button className="bg-red-500 rounded-md w-20 h-8 text-white">
+              Delete
+            </button>
+          </Link>
+        </div>
       </div>
     </Link>
   );

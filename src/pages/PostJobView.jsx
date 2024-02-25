@@ -1,14 +1,22 @@
 import React from "react";
-import { Popover } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import CardEdit from "../components/CardEdit";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useGetMyJob } from "../hooks/api/jobs/useJobsQuery";
+import Loading from "../components/Loading";
+import NoJobs from "../components/NoJobs";
+import Modal from "./Modal";  
+
 
 const PostJobView = () => {
+  const [showModal, setShowModal] = React.useState(false);
+  const [currentJob, setCurrentJob] = React.useState({});
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const userId = currentUser._id;
   const { data, isLoading } = useGetMyJob(userId);
+  if (isLoading) {
+    return <Loading isLoading={isLoading}/>;
+  }
   return (
     <>
       <div className="w-full h-fit flex flex-col items-center">
@@ -22,6 +30,7 @@ const PostJobView = () => {
                 place.
               </span>
             </div>
+            <Modal showModal={showModal} setShowModal={setShowModal} data={currentJob}/>
             <Link 
               to="/postjob"
               className="flex flex-row items-center bg-bluu text-white rounded-lg gap-x-2 w-40 h-10 justify-center">
@@ -33,11 +42,12 @@ const PostJobView = () => {
           </div>
           <div className="flex flex-col items-center lg:w-1/2 w-full">
             <div className="flex flex-col gap-5 w-full">
-              {data.length && data?.map((job) => (
+              <NoJobs data={data?.length} />
+              {data.length ? data?.map((job) => (
                 <>
-                  <CardEdit key={job._id} data={job} />
+                  <CardEdit key={job._id} data={job} setShowModal={setShowModal} setCurrentJob={setCurrentJob}/>
                 </>
-              ))}
+              )): null}
             </div>
           </div>
       </div>
