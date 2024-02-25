@@ -7,6 +7,7 @@ import {
   BellIcon,
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
+  BriefcaseIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
@@ -30,6 +31,8 @@ export default function Header() {
       navigate("/");
     },
   });
+
+  const isAuthorized = currentUser?.isAdmin || currentUser?.isCompany;
 
   const newRef = useRef(null);
   const handleLogout = () => {
@@ -155,19 +158,28 @@ export default function Header() {
         </div>
         {/* logout */}
         {logout && (
-          <div
-            className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center"
-            ref={newRef}
-          >
-            <div className="flex flex-row items-center justify-center gap-2">
-              <UserIcon className="h-6 w-6" />
-              <Link to={`/myaccount/${currentUser?._id}`}>My Account</Link>
-            </div>
             <div
-              className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2"
+            className= {isAuthorized
+                  ? "absolute -bottom-16 right-12 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center justify-center"
+                  : "absolute -bottom-9 right-12 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center justify-center"
+                }
+            ref={newRef}
+            >
+            <div className="flex flex-row items-center text-center justify-start mb-2">
+              <UserIcon className="h-6 w-6 mr-2" />
+              <Link to={`/myaccount/${currentUser?._id}`}>Account</Link>
+            </div>
+            {(currentUser?.isAdmin || currentUser?.isCompany) && (
+              <div className="flex flex-row items-center justify-start mb-2">
+                <BriefcaseIcon className="h-6 w-6 mr-2" />
+                <Link to={`/myjobpost/`}>Jobs Post</Link>
+              </div>
+            )}
+            <div
+              className="cursor-pointer flex flex-row items-center justify-start"
               onClick={mutate}
             >
-              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+              <ArrowLeftStartOnRectangleIcon className="h-6 w-6 mr-2" />
               <span>Logout</span>
             </div>
           </div>

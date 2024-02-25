@@ -2,7 +2,7 @@ import React from "react";
 import { format, formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
 
-const Card = ({ data }) => {
+const CardEdit = ({ data }) => {
   const parts = data?.jobLocation.split(",");
 
   // Location if parts array more than 1 element take the 2nd element
@@ -44,9 +44,20 @@ const Card = ({ data }) => {
         </div>
       </div>
       {/* time */}
-      <span className="capitalize">{formattedDate}</span>
+      <div className="flex flex-row gap-4">
+        <Link to="/">
+          <button className="bg-bluu rounded-md w-20 h-8 text-white">
+            Edit
+          </button>
+        </Link>
+        <Link to="/about">
+          <button className="bg-red-500 rounded-md w-20 h-8 text-white">
+            Delete
+          </button>
+        </Link>
+      </div>
     </Link>
   );
 };
 
-export default Card;
+export default CardEdit;

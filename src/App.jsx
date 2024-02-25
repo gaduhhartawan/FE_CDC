@@ -26,6 +26,13 @@ function App() {
           <Route path="jobs" element={<Jobs />} />
           <Route path="jobs/:id" element={<Job />} />
           <Route path="about" element={<About />} />
+          <Route path="myjobpost" element={
+              user?.isAdmin || user?.isCompany ? (
+                <PostJobView />
+              ) : (
+                <Navigate to={"/login"} replace />
+              )
+            }/>
           <Route
             path="myaccount/:id"
             element={user ? <MyAccount /> : <Navigate to={"/login"} replace />}
@@ -48,7 +55,6 @@ function App() {
           <Route path="resetpassword" element={<Resetpassword />} />
         </Route>
         <Route path="maintenance" element={<WorkingOn />} />
-        <Route path="postjobview" element={<PostJobView />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
