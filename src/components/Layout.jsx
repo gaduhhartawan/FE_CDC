@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="h-screen">
+    <div className="">
       <Header />
       <div className="py-5 lg:px-10 px-3 font-plusjakarta">
         <Outlet />
