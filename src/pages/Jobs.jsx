@@ -205,7 +205,7 @@ const Jobs = () => {
               </select>
             </div>
             {/* Salary */}
-            <h3 className="mt-3">Salary Range</h3>
+            <h3 className="mt-3 font-semibold">Salary Range</h3>
             <div className="flex justify-between items-center gap-3 mt-1">
               <input
                 type="number"

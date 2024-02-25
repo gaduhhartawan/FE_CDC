@@ -9,7 +9,6 @@ const PostJobView = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const userId = currentUser._id;
   const { data, isLoading } = useGetMyJob(userId);
-  // console.log(myjob);
   if (isLoading) {
     return <p>Loading...</p>;
   }

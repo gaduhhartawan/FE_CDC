@@ -134,7 +134,7 @@ export default function Header() {
           )}
           {currentUser && (
             <>
-              <span className="capitalize">
+              <span className="capitalize font-plusjakarta font-medium">
                 Hi, {currentUser?.fullname.split(" ")[0]}
               </span>
               <img

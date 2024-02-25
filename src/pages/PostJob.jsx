@@ -8,6 +8,22 @@ import { useNavigate } from "react-router-dom";
 
 export default function PostJob() {
   const navigate = useNavigate();
+  
+  const type = [
+    {
+      title: "Full-Time",
+      value: "fulltime"
+    },
+    {
+      title: "Part-Time",
+      value: "parttime"
+    },
+    {
+      title: "Internship",
+      value: "internship"
+    }
+  ]
+
   const categories = [
     {
       title: "Frontend",
@@ -34,6 +50,7 @@ export default function PostJob() {
       value: "marketing",
     },
   ];
+
   const [value, setValue] = useState("");
 
   const onCancelClick = () => {
@@ -78,13 +95,23 @@ export default function PostJob() {
                   placeholder="tryfix.com"
                 />
               </div>
-              <label className="text-lg font-medium mt-10"> Job Type</label>
-              <input
-                className=" w-full  rounded-xl p-4 mt-2 bg-gray-200 text-black"
-                type="text"
-                id="jobtype"
-                placeholder="Full-time"
-              />
+              <div>
+              <label className="text-lg font-medium mt-10"> Job Type </label>
+              <div className="flex flex-row w-full justify-end items-center rounded-x">
+                <select
+                  className="w-full rounded-xl p-4 mt-2 appearance-none text-black bg-gray-200"
+                  id="jobtype"
+                >
+                  <option selected>Choose Type</option>
+                  {type.map((category) => (
+                    <option key={category.value} value={category.value}>
+                      {category.title}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDownIcon className="w-5 h-5 absolute mr-3 mt-2 pointer-events-none" />
+              </div>
+            </div>
             </div>
             <div>
               <label className="text-lg font-medium mt-10"> Job Title</label>
