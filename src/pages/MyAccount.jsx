@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 
 const MyAccount = () => {
   const queryClient = useQueryClient();
+  const [mutateLoading, setMutateLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState();
   const [user, setUser] = useState({
@@ -33,7 +34,11 @@ const MyAccount = () => {
       });
       queryClient.invalidateQueries({ queryKey: [id] });
       localStorage.setItem("currentUser", JSON.stringify(data));
+      setMutateLoading(false);
       refetch();
+    },
+    onMutate: () => {
+      setMutateLoading(true);
     },
   });
 
@@ -226,8 +231,9 @@ const MyAccount = () => {
             <button
               className="bg-bluu text-white py-3 w-80 rounded-xl"
               type="submit"
+              disabled={mutateLoading}
             >
-              Save Changes
+              Save Changes {mutateLoading && "..."}
             </button>
             <button
               className="bg-gray-200 text-gray-500 py-3 rounded-xl"

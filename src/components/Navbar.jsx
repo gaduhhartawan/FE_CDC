@@ -48,7 +48,7 @@ export default function Header() {
             Scholarship
           </Link>
           <Link
-            to="/maintenance"
+            to="/coaching"
             className="hover:underline hover:underline-offset-2 hover:decoration-blue-500 hover:decoration-2 text-base font-semibold font-plusjakarta leading-6 text-gray-900"
           >
             Career Coaching
@@ -99,7 +99,7 @@ export default function Header() {
                   Scholarship
                 </Link>
                 <Link
-                  to="/maintenance"
+                  to="/coaching"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Career Coaching
