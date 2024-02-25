@@ -42,7 +42,7 @@ const MyAccount = () => {
     },
   });
 
-  const fullname = data?.fullname.split(" ").join("+");
+  const fullname = data?.fullname?.split(" ").join("+");
 
   useEffect(() => {
     setUser({

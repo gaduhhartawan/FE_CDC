@@ -1,42 +1,55 @@
-import Header from "../components/Header";
 import React from "react";
 import { Link } from "react-router-dom";
-import Card from "../components/Card";
+import CardEdit from "../components/CardEdit";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useGetMyJob } from "../hooks/api/jobs/useJobsQuery";
+import Loading from "../components/Loading";
+import NoJobs from "../components/NoJobs";
+import Modal from "./Modal";  
+
 
 const PostJobView = () => {
+  const [showModal, setShowModal] = React.useState(false);
+  const [currentJob, setCurrentJob] = React.useState({});
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const userId = currentUser._id;
+  const { data, isLoading } = useGetMyJob(userId);
+  if (isLoading) {
+    return <Loading isLoading={isLoading}/>;
+  }
   return (
     <>
-      <Header />
-
-      <div className="w-full h-screen">
-        <div className="w-full flex items-center justify-center">
-          <div className="flex px-10 py-20 rounded-3xl border-1 border-gray-200">
-            <div className="flex flex-col flex-grow">
-              <h1 className="font-plusjakarta text-4xl font-semibold">
-                Job Listing
-              </h1>
-              <p className="font-plusjakarta font-reguler text-lg text-gray-500 mt-4">
+      <div className="w-full h-fit flex flex-col items-center">
+          <div className="flex flex-col lg:flex-row lg:items-end mb-6 lg:w-1/2 w-full lg:justify-between items-center">
+            <div className="flex flex-col md:gap-y-4 items-center lg:items-start mb-5 lg:mb-0 w-1/2">
+              <span className="font-bold text-2xl">
+                My Jobs Post
+              </span>
+              <span className="lg:block hidden text-base">
                 A portal that allows you to manage all your job postings in one
                 place.
-              </p>
+              </span>
             </div>
-
-            <div className="flex flex-col items-end ml-3 ">
-              <Link
-                to="/postjob"
-                className="active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all 
-                flex items-center py-4 px-6 rounded-xl bg-blue-500 text-white font-plusjakarta font-bold "
-              >
-                <PlusIcon className="h-5 w-5 mr-1" />
-                <span className="">Add New Post</span>
-              </Link>
+            <Modal showModal={showModal} setShowModal={setShowModal} data={currentJob}/>
+            <Link 
+              to="/postjob"
+              className="flex flex-row items-center bg-bluu text-white rounded-lg gap-x-2 w-40 h-10 justify-center">
+              <PlusIcon className="h-6 w-6"/>
+              <span className="md:text-base text-s text-center">
+                Add new Post
+              </span>
+            </Link>
+          </div>
+          <div className="flex flex-col items-center lg:w-1/2 w-full">
+            <div className="flex flex-col gap-5 w-full">
+              <NoJobs data={data?.length} />
+              {data.length ? data?.map((job) => (
+                <>
+                  <CardEdit key={job._id} data={job} setShowModal={setShowModal} setCurrentJob={setCurrentJob}/>
+                </>
+              )): null}
             </div>
           </div>
-        </div>
-        <p className="font-plusjakarta font-reguler text-lg text-gray-500 mt-4 text-center">
-          ini row
-        </p>
       </div>
     </>
   );

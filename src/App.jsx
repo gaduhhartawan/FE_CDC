@@ -29,6 +29,13 @@ function App() {
           <Route path="jobs/:id" element={<Job />} />
           <Route path="about" element={<About />} />
           <Route path="coaching" element={<Coaching />} />
+          <Route path="myjobpost" element={
+              user?.isAdmin || user?.isCompany ? (
+                <PostJobView />
+              ) : (
+                <Navigate to={"/login"} replace />
+              )
+            }/>
           <Route
             path="myaccount/:id"
             element={user ? <MyAccount /> : <Navigate to={"/login"} replace />}

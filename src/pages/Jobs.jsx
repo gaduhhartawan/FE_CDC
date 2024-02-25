@@ -3,6 +3,8 @@ import { useGetJobs } from "../hooks/api/jobs/useJobsQuery";
 import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ArrowUpIcon } from "@heroicons/react/24/solid";
+import Loading from "../components/Loading";
+import NoJobs from "../components/NoJobs";
 
 const Jobs = () => {
   const [title, setTitle] = useState("");
@@ -62,7 +64,7 @@ const Jobs = () => {
   }, [selectedCategory, isFilter]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading isLoading={isLoading}/>;
   }
 
   const categories = [
@@ -95,7 +97,7 @@ const Jobs = () => {
       value: "marketing",
     },
   ];
-
+  
   return (
     <div className="lg:px-0 px-5" ref={scrollRef}>
       <div className="text-center mb-10">
@@ -135,6 +137,7 @@ const Jobs = () => {
       {/* List Card */}
       <div className="flex lg:flex-row flex-col-reverse gap-x-5 gap-y-5 relative">
         <div className="flex-1">
+          <NoJobs data={jobs?.length} />
           <InfiniteScroll
             className="flex flex-col gap-y-5"
             dataLength={jobs.length}
@@ -152,7 +155,7 @@ const Jobs = () => {
           }`}
         >
           <div className="flex justify-between items-center">
-            <h3 className="font-bold">Filter Job Board</h3>
+            <h3 className="font-bold">Filters</h3>
             <button className="text-gray-400" onClick={clearFilters}>
               Clear
             </button>
@@ -205,18 +208,18 @@ const Jobs = () => {
               </select>
             </div>
             {/* Salary */}
-            <h3 className="mt-3">Salary Range</h3>
+            <h3 className="mt-3 font-semibold">Salary Range</h3>
             <div className="flex justify-between items-center gap-3 mt-1">
               <input
                 type="number"
-                placeholder="min"
+                placeholder="Min"
                 className="w-full rounded-lg py-1 px-3"
                 onChange={(e) => setMinSalary(e.target.value)}
                 value={minSalary}
               />
               <input
                 type="number"
-                placeholder="max"
+                placeholder="Max"
                 className="w-full rounded-lg py-1 px-3"
                 onChange={(e) => setMaxSalary(e.target.value)}
                 value={maxSalary}

@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { useGetJob } from "../hooks/api/jobs/useJobsQuery";
+import { MapPinIcon, BriefcaseIcon, ClockIcon, BanknotesIcon } from "@heroicons/react/24/outline";
 
 const Job = () => {
   const { id } = useParams();
@@ -84,26 +83,34 @@ const Job = () => {
               {/* Job Description */}
               <div className="flex flex-col gap-1 my-3">
                 <h2 className="text-2xl font-semibold">Job Description</h2>
-                <p className="font-light text-justify">{job.jobDesc}</p>
+                <p className="text-justify">
+                  <div dangerouslySetInnerHTML={{__html: job.jobDesc}}>
+
+                  </div>
+                </p>
               </div>
             </div>
 
             <div className="right flex-[1] flex flex-col gap-2">
               <h2 className="text-2xl font-semibold">Job Overview</h2>
-              <div className="bg-blue-200 rounded-md grid lg:grid-cols-2 grid-cols-1 p-5 gap-5">
-                <div className="text-lg font-semibold text-center">
+              <div className="bg-whitegray rounded-xl grid lg:grid-cols-2 grid-cols-1 p-5 gap-5">
+                <div className="flex flex-col text-lg font-semibold text-center items-center">
+                  <MapPinIcon className="h-10 text-bluu"/>
                   <h3 className="text-gray-400">Job Location</h3>
                   <span>{location}</span>
                 </div>
-                <div className="text-lg font-semibold text-center">
+                <div className="flex flex-col text-lg font-semibold text-center">
+                  <BriefcaseIcon className="h-10 text-bluu"/>
                   <h3 className="text-gray-400">Working Site</h3>
                   <span className="capitalize">{job.workingSite}</span>
                 </div>
-                <div className="text-lg font-semibold text-center">
+                <div className="flex flex-col text-lg font-semibold text-center">
+                  <ClockIcon className="h-10 text-bluu"/>
                   <h3 className="text-gray-400">Job Posted</h3>
                   <span>{format(new Date(job.createdAt), "dd-MM-yyyy")}</span>
                 </div>
-                <div className="text-lg font-semibold text-center">
+                <div className="flex flex-col text-lg font-semibold text-center">
+                  <BanknotesIcon className="h-10 text-bluu"/>
                   <h3 className="text-gray-400">Salary Monthly</h3>
                   <span>
                     {job.salaryNum ? "IDR " + job.salaryNum : "Undisclosed"}
