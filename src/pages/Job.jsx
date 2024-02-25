@@ -39,6 +39,10 @@ const Job = () => {
             <Link to="/">Home</Link>
           </span>
           <span>/</span>
+          <span>
+            <Link to="/jobs">All Jobs</Link>
+          </span>
+          <span>/</span>
           <div className="text-gray-400">Job Details</div>
         </div>
         {/* Content */}

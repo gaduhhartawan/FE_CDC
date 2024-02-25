@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Coaching = () => {
   return (
-    <div className="flex justify-between items-center px-10">
-      <div className="flex flex-col gap-7 w-1/2">
+    <div className="flex lg:flex-row flex-col-reverse justify-between items-center px-10 gap-y-5 h-[73vh]">
+      <div className="flex flex-col gap-7 lg:w-1/2">
         <h1 className="text-5xl font-bold">Achieve Your Career Potential</h1>
         <p className="max-w-md">
           Find the support and strategies you need to advance your career
@@ -16,7 +16,7 @@ const Coaching = () => {
           Get Started
         </Link>
       </div>
-      <img src="/career.png" alt="career" className="flex-1 max-w-lg" />
+      <img src="/career.png" alt="career" className="flex-1 w-80 max-w-lg" />
     </div>
   );
 };
