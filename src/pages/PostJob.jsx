@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import React, { useState, useEffect } from "react";
-import { postJob } from "../hooks/api/jobs/useJobsQuery";
+import { usePostJob } from "../hooks/api/jobs/useJobsQuery";
 import RichTextEditor from "../components/RichTextEditor";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -97,7 +97,7 @@ export default function PostJob() {
 
   console.log(job);
 
-  const { mutate, error } = postJob({
+  const { mutate, error } = usePostJob({
     onSuccess: () => {
       setJob({
         userId: currentUser?._id,

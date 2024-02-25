@@ -46,9 +46,16 @@ export const useGetMyJob = (userId) => {
   });
 };
 
-export const postJob = ({ onSuccess }) => {
+export const usePostJob = ({ onSuccess }) => {
   return useMutation({
     mutationFn: async (job) => await axiosInstance.post("/jobs", { ...job }),
+    onSuccess,
+  });
+};
+
+export const useDeleteJob = ({ onSuccess }) => {
+  return useMutation({
+    mutationFn: async (jobId) => await axiosInstance.delete(`/jobs/${jobId}`),
     onSuccess,
   });
 };

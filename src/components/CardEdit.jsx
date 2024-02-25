@@ -1,9 +1,22 @@
 import React from "react";
 import { format, formatDistanceToNow } from "date-fns";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDeleteJob } from "../hooks/api/jobs/useJobsQuery";
+import Swal from "sweetalert2";
 
 const CardEdit = ({ data }) => {
+  const queryClient = useQueryClient();
   const parts = data?.jobLocation.split(",");
+  const { mutate } = useDeleteJob({
+    onSuccess: () => {
+      toast.success("Deleted Succesfuly!", {
+      pauseOnHover: false,
+      position: "bottom-right",
+      });
+      queryClient.invalidateQueries({ queryKey: [data.userId] });}
+  });
 
   // Location if parts array more than 1 element take the 2nd element
   let location;
@@ -23,8 +36,21 @@ const CardEdit = ({ data }) => {
   const formattedDate = formatDistanceToNow(date, { addSuffix: true });
 
   // Job Type Handle more than 1
-  const jobType = data.jobType.join(", ") 
+  const jobType = data.jobType.join(", ")
 
+  const onConfirmClick = () => {
+    Swal.fire({
+      icon: "question",
+      title: "Are you sure want to delete this post?",
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: "#E54335",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutate(data._id);
+      }
+    });
+  };
   return (
     <Link
       to={`/jobs/${data._id}`}
@@ -50,8 +76,8 @@ const CardEdit = ({ data }) => {
             Edit
           </button>
         </Link>
-        <Link to="/about">
-          <button className="bg-red-500 rounded-md w-20 h-8 text-white">
+        <Link>
+          <button className="bg-red-500 rounded-md w-20 h-8 text-white" onClick={onConfirmClick}>
             Delete
           </button>
         </Link>
