@@ -22,7 +22,7 @@ export default function LoginPage() {
       setEmail("");
       setPassword("");
       setTimeout(() => {
-        navigate("/");
+        navigate("/", {replace:true});
       }, 1500);
     },
     onMutate: () => setIsLoading(true),

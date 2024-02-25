@@ -5,9 +5,9 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="h-screen">
+    <div className="flex flex-col">
       <Header />
-      <div className="py-5 lg:px-10 px-3 font-plusjakarta">
+      <div className="flex-1 lg:px-10 px-3 font-plusjakarta mb-8">
         <Outlet />
       </div>
       <Footer />

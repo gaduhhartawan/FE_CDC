@@ -6,10 +6,12 @@ import {
 import { toast } from "react-toastify";
 import upload from "../utils/upload";
 import { useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyAccount = () => {
   const queryClient = useQueryClient();
+  const [mutateLoading, setMutateLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState();
   const [user, setUser] = useState({
@@ -21,6 +23,7 @@ const MyAccount = () => {
   });
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data, isLoading, refetch } = useGetUser(id);
   const { mutate } = useUpdateUserMutation(id, {
@@ -31,11 +34,15 @@ const MyAccount = () => {
       });
       queryClient.invalidateQueries({ queryKey: [id] });
       localStorage.setItem("currentUser", JSON.stringify(data));
+      setMutateLoading(false);
       refetch();
+    },
+    onMutate: () => {
+      setMutateLoading(true);
     },
   });
 
-  const fullname = data?.fullname.split(" ").join("+");
+  const fullname = data?.fullname?.split(" ").join("+");
 
   useEffect(() => {
     setUser({
@@ -73,6 +80,21 @@ const MyAccount = () => {
         password: user.password,
         imgUrl: url ? url : data.imgUrl,
       },
+    });
+  };
+
+  const onCancelClick = () => {
+    Swal.fire({
+      icon: "question",
+      title: "Cancel Edit Account?",
+      text: "Not ready to share just yet? No worries! Save your post and come back to it later",
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: "#E54335",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
     });
   };
 
@@ -209,10 +231,15 @@ const MyAccount = () => {
             <button
               className="bg-bluu text-white py-3 w-80 rounded-xl"
               type="submit"
+              disabled={mutateLoading}
             >
-              Save Changes
+              Save Changes {mutateLoading && "..."}
             </button>
-            <button className="bg-gray-200 text-gray-500 py-3 rounded-xl" type="reset">
+            <button
+              className="bg-gray-200 text-gray-500 py-3 rounded-xl"
+              type="button"
+              onClick={onCancelClick}
+            >
               Cancel
             </button>
           </div>

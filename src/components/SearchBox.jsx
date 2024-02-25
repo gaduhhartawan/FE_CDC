@@ -15,13 +15,13 @@ export default function SearchBox({ setlocation, setSearch }) {
   }
 
   return (
-    <div className="rounded-sr h-80 lg:h-fit flex flex-col items-center justify-center bg-bluu">
+    <div className="rounded-sr h-80 xl:h-fit flex flex-col items-center justify-center bg-bluu">
       <img src="bar.svg" className="size-full" />
-      <div className="lg:flex flex-col gap-8 absolute items-center lg:mt-12">
-        <div className="text-white text-2xl lg:text-st font-plusjakarta font-semibold text-center lg:w-full w-3/5 mx-auto">
+      <div className="lg:flex flex-col gap-4 absolute items-center lg:mt-12">
+        <div className="text-white text-2xl lg:text-5xl xl:text-st font-plusjakarta font-semibold text-center lg:w-full w-3/5 mx-auto">
           Looking for a new opportunities?
         </div>
-        <div className="text-white lg:text-lg font-plusjakarta font-semibold text-center lg:mb-0 my-3 lg:w-full w-1/2 mx-auto">
+        <div className="text-white lg:text-xl font-plusjakarta font-semibold text-center lg:mb-0 my-3 lg:w-full w-1/2 mx-auto">
           Browse out latest job openings that you want
         </div>
         <div className="flex w-3/4 lg:w-full rounded-full bg-search-bar items-center justify-center mx-auto lg:mt-0 mt-2">

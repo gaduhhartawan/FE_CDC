@@ -9,10 +9,11 @@ export const useGetUser = (userId) => {
   });
 };
 
-export const useUpdateUserMutation = (userId, { onSuccess }) => {
+export const useUpdateUserMutation = (userId, { onSuccess, onMutate }) => {
   return useMutation({
     mutationFn: async ({ user }) =>
       await axiosInstance.patch(`/users/${userId}`, { ...user }),
     onSuccess,
+    onMutate,
   });
 };

@@ -14,6 +14,8 @@ import Notfound from "./pages/Notfound";
 import WorkingOn from "./pages/Maintenance";
 import PostJobView from "./pages/PostJobView";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
+import Chat from "./pages/Chat";
+import Coaching from "./pages/Coaching";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -26,6 +28,14 @@ function App() {
           <Route path="jobs" element={<Jobs />} />
           <Route path="jobs/:id" element={<Job />} />
           <Route path="about" element={<About />} />
+          <Route path="coaching" element={<Coaching />} />
+          <Route path="myjobpost" element={
+              user?.isAdmin || user?.isCompany ? (
+                <PostJobView />
+              ) : (
+                <Navigate to={"/login"} replace />
+              )
+            }/>
           <Route
             path="myaccount/:id"
             element={user ? <MyAccount /> : <Navigate to={"/login"} replace />}
@@ -49,6 +59,7 @@ function App() {
         </Route>
         <Route path="maintenance" element={<WorkingOn />} />
         <Route path="postjobview" element={<PostJobView />} />
+        <Route path="coaching/chat" element={<Chat />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>

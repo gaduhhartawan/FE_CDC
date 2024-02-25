@@ -1,9 +1,15 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Dialog, Popover } from "@headlessui/react";
 import { toast } from "react-toastify";
-import { Bars3Icon, XMarkIcon, BellIcon, UserIcon, ArrowLeftStartOnRectangleIcon} from "@heroicons/react/24/outline";
-import { NavLink, Link, useNavigate} from "react-router-dom";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  BellIcon,
+  UserIcon,
+  ArrowLeftStartOnRectangleIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/24/outline";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../hooks/api/auth/useAuthQuery";
 
 export default function Header() {
@@ -26,6 +32,8 @@ export default function Header() {
     },
   });
 
+  const isAuthorized = currentUser?.isAdmin || currentUser?.isCompany;
+
   const newRef = useRef(null);
   const handleLogout = () => {
     setLogout(!logout);
@@ -36,7 +44,7 @@ export default function Header() {
       setLogout(false);
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
@@ -51,10 +59,10 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img className="h-8 w-auto" src="/ico.png" alt="" />
-          </a>
+          </Link>
           <Link
             to="/"
             className="mx-2 flex text-3xl font-bold font-plusjakarta tracking-tight"
@@ -76,26 +84,28 @@ export default function Header() {
           <NavLink
             to="/jobs"
             className={({ isActive }) =>
-                        isActive ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2" 
-                        : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2" }
+              isActive
+                ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2"
+                : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
+            }
           >
             Find Job
           </NavLink>
           {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
             Companies
           </a> */}
-          <a
-            href="/maintenance"
+          <Link
+            to="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Scholarship
-          </a>
-          <a
-            href="/maintenance"
+          </Link>
+          <Link
+            to="/coaching"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Career Coaching
-          </a>
+          </Link>
           <NavLink
             to="/about"
             id="about"
@@ -108,30 +118,37 @@ export default function Header() {
             About
           </NavLink>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-7">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center lg:gap-x-4">
           {currentUser && <BellIcon className="h-7 w-7 lg:flex self-center" />}
           {(currentUser?.isAdmin || currentUser?.isCompany) && (
             <NavLink
               to="/postjob"
               className={({ isActive }) =>
-                isActive ? "text-base font-extrabold underline underline-offset-2 decoration-bluu decoration-2 font-plusjakarta leading-6 text-gray-900 self-center"
-              : "text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center" }
+                isActive
+                  ? "text-base font-extrabold underline underline-offset-2 decoration-bluu decoration-2 font-plusjakarta leading-6 text-gray-900 self-center"
+                  : "text-base font-semibold font-plusjakarta leading-6 text-gray-900 self-center"
+              }
             >
               Post a Job
             </NavLink>
           )}
           {currentUser && (
-            <img
-              src={
-                currentUser?.imgUrl === "None"
-                  ? `https://ui-avatars.com/api/?name=${fullname}`
-                  : currentUser?.imgUrl
-              }
-              alt=""
-              className="w-10 h-10 cursor-pointer rounded-full"
-              ref={newRef}
-              onClick={handleLogout}
-            />
+            <>
+              <span className="capitalize">
+                Hi, {currentUser?.fullname.split(" ")[0]}
+              </span>
+              <img
+                src={
+                  currentUser?.imgUrl === "None"
+                    ? `https://ui-avatars.com/api/?name=${fullname}`
+                    : currentUser?.imgUrl
+                }
+                alt=""
+                className="w-10 h-10 cursor-pointer rounded-full"
+                ref={newRef}
+                onClick={handleLogout}
+              />
+            </>
           )}
           {!currentUser && (
             <Link
@@ -146,16 +163,28 @@ export default function Header() {
         </div>
         {/* logout */}
         {logout && (
-          <div className="absolute -bottom-10 right-9 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center" ref={newRef}>
-            <div className="flex flex-row items-center justify-center gap-2">
-              <UserIcon className="h-6 w-6" />
-              <Link to={`/myaccount/${currentUser?._id}`}>My Account</Link>
-            </div>
             <div
-              className="cursor-pointer flex flex-row items-center justify-center gap-1 mt-2"
+            className= {isAuthorized
+                  ? "absolute -bottom-16 right-12 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center justify-center"
+                  : "absolute -bottom-9 right-12 border bg-white border-gray-400 p-2 rounded-xl w-36 text-center justify-center"
+                }
+            ref={newRef}
+            >
+            <div className="flex flex-row items-center text-center justify-start mb-2">
+              <UserIcon className="h-6 w-6 mr-2" />
+              <Link to={`/myaccount/${currentUser?._id}`}>Account</Link>
+            </div>
+            {(currentUser?.isAdmin || currentUser?.isCompany) && (
+              <div className="flex flex-row items-center justify-start mb-2">
+                <BriefcaseIcon className="h-6 w-6 mr-2" />
+                <Link to={`/myjobpost/`}>Jobs Post</Link>
+              </div>
+            )}
+            <div
+              className="cursor-pointer flex flex-row items-center justify-start"
               onClick={mutate}
             >
-              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+              <ArrowLeftStartOnRectangleIcon className="h-6 w-6 mr-2" />
               <span>Logout</span>
             </div>
           </div>
@@ -170,10 +199,10 @@ export default function Header() {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img className="h-8 w-auto" src="ico.png" alt="" />
-            </a>
+            </Link>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -186,38 +215,57 @@ export default function Header() {
           <div className="mt-10 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/jobs"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Find Job
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Scholarship
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/coaching"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Career Coaching
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   About
-                </a>
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
+                {currentUser ? (
+                  <>
+                    <Link
+                      to={`/myaccount/${currentUser?._id}`}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      My Account
+                    </Link>
+
+                    <button
+                      to="/login"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      onClick={mutate}
+                    >
+                      Log out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </div>
           </div>

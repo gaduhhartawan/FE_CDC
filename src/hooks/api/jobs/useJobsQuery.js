@@ -37,3 +37,11 @@ export const useGetJob = (jobId) => {
       await axiosInstance.get(`/jobs/${jobId}`).then((res) => res.data),
   });
 };
+
+export const useGetMyJob = (userId) => {
+  return useQuery({
+    queryKey: [userId],
+    queryFn: async () =>
+      await axiosInstance.get(`/jobs/myjobs/${userId}`).then((res) => res.data),
+  });
+};
