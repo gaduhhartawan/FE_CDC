@@ -30,13 +30,13 @@ const Jobs = () => {
   );
 
   const applyFilters = () => {
-    setIsFilter(true)
+    setIsFilter(true);
     setSelectedCategory("");
     refetch();
   };
 
   const clearFilters = () => {
-    setIsFilter(false)
+    setIsFilter(false);
     setTitle("");
     setLocation("");
     setMinSalary("");
@@ -94,7 +94,7 @@ const Jobs = () => {
   ];
 
   return (
-    <div className="lg:px-0 px-5 relative">
+    <div className="lg:px-0 px-5">
       <div className="text-center mb-10">
         <h2 className="font-bold text-3xl mb-1">
           Explore a world of possibilities with Top Companies
@@ -132,7 +132,10 @@ const Jobs = () => {
       {/* List Card */}
       <div className="flex lg:flex-row flex-col-reverse gap-x-5 gap-y-5 relative">
         <div className="flex-1">
-          <InfiniteScroll className="flex flex-col gap-y-5" dataLength={jobs.length}>
+          <InfiniteScroll
+            className="flex flex-col gap-y-5"
+            dataLength={jobs.length}
+          >
             {/* Card */}
             {jobs?.map((job) => (
               <Card key={job._id} data={job} />
