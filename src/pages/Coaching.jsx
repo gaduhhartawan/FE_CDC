@@ -11,7 +11,7 @@ const Coaching = () => {
         </p>
         <Link
           to="/coaching/chat"
-          className="text-white bg-blue-700 lg:w-48 py-4 rounded-full text-center"
+          className="text-white bg-bluu lg:w-48 py-4 rounded-full text-center"
         >
           Get Started
         </Link>
