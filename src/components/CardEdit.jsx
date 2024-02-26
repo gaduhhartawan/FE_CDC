@@ -11,7 +11,7 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
   const parts = data?.jobLocation.split(",");
   const { mutate } = useDeleteJob({
     onSuccess: () => {
-      toast.success("Job Deleted Succesfuly!", {
+      toast.success("Post remove Succesfuly!", {
         pauseOnHover: false,
         position: "bottom-right",
       });
@@ -40,7 +40,7 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
   const onConfirmDeleteClick = () => {
     Swal.fire({
       icon: "question",
-      title: "Are you sure want to delete this post?",
+      title: "Are you sure want to remove this post?",
       showCancelButton: true,
       showConfirmButton: true,
       confirmButtonColor: "#E54335",
@@ -81,7 +81,7 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
           </Link>
           <Link onClick={onConfirmDeleteClick}>
             <button className="text-red-500 font-medium rounded-md w-20 h-8">
-              Delete
+              Remove
             </button>
           </Link>
         </div>
