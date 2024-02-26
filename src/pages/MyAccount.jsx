@@ -21,6 +21,8 @@ const MyAccount = () => {
     password: "",
     imgUrl: "",
     phone: "",
+    isAdmin: "",
+    isCompany : "",
   });
 
   const { id } = useParams();
@@ -50,6 +52,8 @@ const MyAccount = () => {
       fullname: data?.fullname,
       email: data?.email,
       phone: data?.phone,
+      isCompany : data?.isCompany,
+      isAdmin : data?.isAdmin
     });
   }, [data]);
 
