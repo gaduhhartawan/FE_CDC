@@ -15,14 +15,15 @@ export default function LoginPage() {
   const { mutate } = useLoginMutation({
     onSuccess: (data) => {
       localStorage.setItem("currentUser", JSON.stringify(data.data));
-      toast.success("Login Berhasil!", {
+      toast.success("Login Successfully!", {
         pauseOnHover: false,
         position: "bottom-right",
       });
       setEmail("");
       setPassword("");
+      navigate("/", { replace: true });
       setTimeout(() => {
-        navigate("/", {replace:true});
+        window.location.reload();
       }, 1500);
     },
     onMutate: () => setIsLoading(true),

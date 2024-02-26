@@ -68,7 +68,7 @@ const Chat = () => {
             messages.map((message, index) => (
               <div
                 key={index}
-                className={`bg-slate-100 w-[48%] ${
+                className={`bg-slate-100 w-3/4 lg:w-[48%] ${
                   message.role === "bot" ? " text-left" : " text-left "
                 }`}
               >
