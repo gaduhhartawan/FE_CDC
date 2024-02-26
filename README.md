@@ -65,4 +65,4 @@ VITE_GEMINI_API_KEY = $your_google_api_key
 - Google/Generative AI
 
 ## Live Demo
-You can access live demo on this url [Live Demo](https://fe-cdc.vercel.app/)
+You can access live demo on this url [Live Demo](https://careerpath-cdc.vercel.app/)
