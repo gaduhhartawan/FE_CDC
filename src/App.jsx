@@ -72,7 +72,7 @@ function App() {
         <Route path="welcome" element={<Welcome />} />
         <Route
           path="coaching/chat"
-          element={!user ? <Navigate to="/login" /> : <Chat />}
+          element={user ? <Chat /> : <Navigate to="/login" replace />}
         />
         <Route path="*" element={<Notfound />} />
       </Routes>
