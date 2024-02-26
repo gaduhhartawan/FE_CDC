@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import JoditEditor from "jodit-react";
 
 const config = {
@@ -36,13 +36,18 @@ const config = {
   sizeLG : "500"
 };
 
-const RichTextEditor = ({ setValue }) => {
+const RichTextEditor = ({ value, setValue }) => {
   // Menambahkan parameter config
   const editor = useRef(null);
+
+  useEffect(() => {
+    setValue(value);
+  }, [value]);
 
   return (
     <JoditEditor
       ref={editor}
+      value={value}
       onChange={(content) => setValue(content)}
       config={config} // Menggunakan parameter config yang diterima
     />

@@ -32,7 +32,7 @@ const Coaching = () => {
         </p>
         <button
           onClick={handleNavigate}
-          className="text-white bg-blue-700 lg:w-48 py-4 rounded-full text-center"
+          className="text-white bg-bluu lg:w-48 py-4 rounded-full text-center"
         >
           Get Started
         </button>

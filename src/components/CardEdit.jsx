@@ -11,7 +11,7 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
   const parts = data?.jobLocation.split(",");
   const { mutate } = useDeleteJob({
     onSuccess: () => {
-      toast.success("Job Deleted Succesfuly!", {
+      toast.success("Post remove Succesfuly!", {
         pauseOnHover: false,
         position: "bottom-right",
       });
@@ -37,10 +37,10 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
   // Job Type Handle more than 1
   const jobType = data.jobType.join(", ");
 
-  const onConfirmClick = () => {
+  const onConfirmDeleteClick = () => {
     Swal.fire({
       icon: "question",
-      title: "Are you sure want to delete this post?",
+      title: "Are you sure want to remove this post?",
       showCancelButton: true,
       showConfirmButton: true,
       confirmButtonColor: "#E54335",
@@ -53,7 +53,7 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
   return (
     <Link
       to={`/jobs/${data._id}`}
-      className="flex md:flex-row flex-col md:gap-y-0 gap-y-4  justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
+      className="flex md:flex-row flex-col md:gap-y-0 gap-y-4 justify-between items-center p-5 bg-[#EFEFEF] hover:bg-[#DDE2ED] rounded-2xl cursor-pointer"
     >
       {/* user */}
       <div className="flex md:flex-row flex-col items-center gap-4 text-center md:text-left">
@@ -74,14 +74,14 @@ const CardEdit = ({ data, setShowModal, setCurrentJob }) => {
       <div className="flex flex-col items-center gap-y-2">
         <span className="capitalize">{formattedDate}</span>
         <div className="flex flex-row gap-4">
-          <Link onClick={() => (setShowModal(true), setCurrentJob(data))}>
+          <Link onClick={() => {setCurrentJob(data); setShowModal(true)}}>
             <button className="bg-bluu rounded-md w-20 h-8 text-white">
               Edit
             </button>
           </Link>
-          <Link onClick={onConfirmClick}>
-            <button className="bg-red-500 rounded-md w-20 h-8 text-white">
-              Delete
+          <Link onClick={onConfirmDeleteClick}>
+            <button className="text-red-500 font-medium rounded-md w-20 h-8">
+              Remove
             </button>
           </Link>
         </div>

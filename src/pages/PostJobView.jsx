@@ -5,7 +5,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { useGetMyJob } from "../hooks/api/jobs/useJobsQuery";
 import Loading from "../components/Loading";
 import NoJobs from "../components/NoJobs";
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 
 const PostJobView = () => {
   const [showModal, setShowModal] = React.useState(false);
@@ -18,7 +18,7 @@ const PostJobView = () => {
   }
   return (
     <>
-      <div className="w-full h-fit flex flex-col items-center">
+      <div className="w-full h-fit flex flex-col items-center lg:h-screen">
         <div className="flex flex-col lg:flex-row lg:items-end mb-6 lg:w-1/2 w-full lg:justify-between items-center">
           <div className="flex flex-col md:gap-y-4 items-center lg:items-start mb-5 lg:mb-0 w-1/2">
             <span className="font-bold text-2xl">My Jobs Post</span>
@@ -30,7 +30,7 @@ const PostJobView = () => {
           <Modal
             showModal={showModal}
             setShowModal={setShowModal}
-            data={currentJob}
+            jobData={currentJob}
           />
           <Link
             to="/postjob"
@@ -43,7 +43,7 @@ const PostJobView = () => {
           </Link>
         </div>
         <div className="flex flex-col items-center lg:w-1/2 w-full">
-          <div className="flex flex-col gap-5 w-full">
+          <div className="flex flex-col gap-5 md:w-full">
             <NoJobs data={data?.length} />
             {data.length
               ? data?.map((job) => (
