@@ -150,6 +150,7 @@ const MyAccount = () => {
             type="file"
             id="file-input"
             className="hidden"
+            accept="image/*"
           />
           {/* Fullname */}
           <div className="flex flex-col gap-1 mb-3 w-80">
