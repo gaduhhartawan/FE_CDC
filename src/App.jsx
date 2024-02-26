@@ -1,4 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Job from "./pages/Job";
 import About from "./pages/About";
@@ -30,13 +36,16 @@ function App() {
           <Route path="jobs/:id" element={<Job />} />
           <Route path="about" element={<About />} />
           <Route path="coaching" element={<Coaching />} />
-          <Route path="myjobpost" element={
+          <Route
+            path="myjobpost"
+            element={
               user?.isAdmin || user?.isCompany ? (
                 <PostJobView />
               ) : (
                 <Navigate to={"/login"} replace />
               )
-            }/>
+            }
+          />
           <Route
             path="myaccount/:id"
             element={user ? <MyAccount /> : <Navigate to={"/login"} replace />}
@@ -61,7 +70,10 @@ function App() {
         <Route path="maintenance" element={<WorkingOn />} />
         <Route path="postjobview" element={<PostJobView />} />
         <Route path="welcome" element={<Welcome />} />
-        <Route path="coaching/chat" element={<Chat />} />
+        <Route
+          path="coaching/chat"
+          element={user ? <Chat /> : <Navigate to="/login" replace />}
+        />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
