@@ -174,12 +174,12 @@ export default function Header() {
             >
             <div className="flex flex-row items-center text-center justify-start mb-2">
               <UserIcon className="h-6 w-6 mr-2" />
-              <Link to={`/myaccount/${currentUser?._id}`}>Account</Link>
+              <Link to={`/myaccount/${currentUser?._id}`} onClick={handleLogout}>Account</Link>
             </div>
             {(currentUser?.isAdmin || currentUser?.isCompany) && (
               <div className="flex flex-row items-center justify-start mb-2">
                 <BriefcaseIcon className="h-6 w-6 mr-2" />
-                <Link to={`/myjobpost/`}>Jobs Post</Link>
+                <Link to={`/myjobpost/`} onClick={handleLogout}>Jobs Post</Link>
               </div>
             )}
             <div
