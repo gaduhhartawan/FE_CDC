@@ -60,11 +60,10 @@ export const useDeleteJob = ({ onSuccess }) => {
   });
 };
 
-export const useUpdateJob = (jobId, { onSuccess, onMutate }) => {
+export const useUpdateJob = (jobId, { onSuccess }) => {
   return useMutation({
     mutationFn: async ({ job }) =>
       await axiosInstance.patch(`/jobs/${jobId}`, { ...job }),
     onSuccess,
-    onMutate,
   });
 };

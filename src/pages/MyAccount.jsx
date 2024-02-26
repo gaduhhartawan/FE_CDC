@@ -8,6 +8,7 @@ import upload from "../utils/upload";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loading from "../components/Loading";
 
 const MyAccount = () => {
   const queryClient = useQueryClient();
@@ -53,7 +54,7 @@ const MyAccount = () => {
   }, [data]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading isLoading={isLoading} />;
   }
 
   const handleChange = (e) => {

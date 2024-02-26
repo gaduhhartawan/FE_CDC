@@ -1,8 +1,5 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
-
-import Svg2 from "../components/Maintenance";
 
 export default function WorkingOn() {
   return (
@@ -13,12 +10,12 @@ export default function WorkingOn() {
             <b>Oops!</b> <br /> We{"'"}re working on it!
           </h1>
           <div className="mt-10">
-            <Svg2 />
+            <img src="/maintenance.svg" className="" alt="Under Maintenance" />
           </div>
           <div className="mt-8">
             <div className="flex justify-center ">
               <Link to="/" className="text-white">
-                <button className="active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all py-4 px-8 rounded-xl bg-blue-400 text-white font-bold mt-3">
+                <button className="active:scale-[.98] active-duration-75 hover:scale-[1.01] ease-in-out transition-all py-4 px-8 rounded-xl bg-bluu text-white font-bold mt-3">
                   Go Home
                 </button>
               </Link>

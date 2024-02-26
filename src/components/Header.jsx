@@ -28,6 +28,7 @@ export default function Header() {
         pauseOnHover: false,
         position: "bottom-right",
       });
+      setMobileMenuOpen(false);
       navigate("/");
     },
   });
@@ -60,8 +61,8 @@ export default function Header() {
       >
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src="/ico.png" alt="" />
+            <span className="sr-only">careerpath.</span>
+            <img className="h-8 w-auto" src="/ico.png" alt="careerpath" />
           </Link>
           <Link
             to="/"
@@ -91,21 +92,22 @@ export default function Header() {
           >
             Find Job
           </NavLink>
-          {/* <a href="#" className="text-base font-semibold font-plusjakarta leading-6 text-gray-900">
-            Companies
-          </a> */}
           <Link
             to="/maintenance"
             className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
           >
             Scholarship
           </Link>
-          <Link
+          <NavLink
             to="/coaching"
-            className="hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
+            className={({ isActive }) =>
+              isActive
+                ? "font-extrabold underline underline-offset-2 decoration-bluu decoration-2"
+                : "hover:underline hover:underline-offset-2 hover:decoration-bluu hover:decoration-2"
+            }
           >
             Career Coaching
-          </Link>
+          </NavLink>
           <NavLink
             to="/about"
             id="about"
@@ -199,7 +201,8 @@ export default function Header() {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link to="/" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-1.5 p-1.5"
+            onClick={() => setMobileMenuOpen(false)}>
               <span className="sr-only">Your Company</span>
               <img className="h-8 w-auto" src="ico.png" alt="" />
             </Link>
@@ -218,24 +221,28 @@ export default function Header() {
                 <Link
                   to="/jobs"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Find Job
                 </Link>
                 <Link
                   to="/maintenance"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Scholarship
                 </Link>
                 <Link
                   to="/coaching"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Career Coaching
                 </Link>
                 <Link
                   to="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   About
                 </Link>
@@ -243,15 +250,28 @@ export default function Header() {
               <div className="py-6">
                 {currentUser ? (
                   <>
-                    <Link
-                      to={`/myaccount/${currentUser?._id}`}
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      My Account
-                    </Link>
-
+                    <div className="flex flex-row justify-between">
+                      <Link
+                        to={`/myaccount/${currentUser?._id}`}
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        My Account
+                      </Link>
+                      <span className="mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-300 hover:bg-gray-50 capitalize">
+                        {currentUser?.fullname}
+                      </span>
+                    </div>
+                    {(currentUser?.isAdmin || currentUser?.isCompany) && (
+                        <Link 
+                        to={`/myjobpost/`}
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        onClick={() => setMobileMenuOpen(false)}>
+                          Jobs Post
+                        </Link>
+                    )}
+                    <hr className="h-px my-5 bg-gray-100 border-0" />
                     <button
-                      to="/login"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       onClick={mutate}
                     >
@@ -262,6 +282,7 @@ export default function Header() {
                   <Link
                     to="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     Log in
                   </Link>

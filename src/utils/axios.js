@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://weary-gray-knickers.cyclic.app/api",
+  baseURL: "http://localhost:8800/api",
   withCredentials: true,
 });
 
