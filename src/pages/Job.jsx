@@ -17,6 +17,11 @@ const Job = () => {
     location = parts ? parts[0].trim() : "";
   }
 
+  const formattedNumber = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(job?.salaryNum);
+
   //Link
   const linkJob = job?.jobLink;
 
@@ -117,7 +122,7 @@ const Job = () => {
                   <BanknotesIcon className="h-10 text-bluu"/>
                   <h3 className="text-gray-400">Salary Monthly</h3>
                   <span>
-                    {job.salaryNum ? "IDR " + job.salaryNum : "Undisclosed"}
+                    {job.salaryNum ? formattedNumber.split(",")[0] : "Undisclosed"}
                   </span>
                 </div>
               </div>
